@@ -1,0 +1,56 @@
+{
+    "1gen": {
+        "alakazam": {
+            "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\alakazam.png",
+            "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\alakazam_black.png"
+        },
+        "charmeleon": {
+            "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\charmeleon.png",
+            "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\charmeleon_black.png"
+        },
+        "meowth": {
+            "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\meowth.png",
+            "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\meowth_black.png"
+        },
+        "pidgey": {
+            "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\pidgey.png",
+            "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\pidgey_black.png"
+        }
+    },
+    "2gen": {
+        "chikorita": {
+            "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\chikorita.png",
+            "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\chikorita_black.png"
+        },
+        "octillery": {
+            "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\octillery.png",
+            "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\octillery_black.png"
+        },
+        "steelix": {
+            "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\steelix.png",
+            "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\steelix_black.png"
+        },
+        "totodile": {
+            "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\totodile.png",
+            "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\totodile_black.png"
+        }
+    },
+    "3gen": {
+        "cascoon": {
+            "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\cascoon.png",
+            "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\cascoon_black.png"
+        },
+        "mudkip": {
+            "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\mudkip.png",
+            "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\mudkip_black.png"
+        },
+        "torchic": {
+            "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\torchic.png",
+            "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\torchic_black.png"
+        },
+        "treecko": {
+            "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\treecko.png",
+            "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\treecko_black.png"
+        }
+    }
+}

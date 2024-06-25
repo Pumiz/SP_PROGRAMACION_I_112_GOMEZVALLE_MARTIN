@@ -48,9 +48,53 @@ except Exception as e:
     print(f"Error al escribir el archivo JSON: {e}")
 
 
+"""
+import pygame
 
+# Inicializar Pygame
+pygame.init()
 
+# Configurar la pantalla
+screen = pygame.display.set_mode((800, 600))
+pygame.display.set_caption("Traducción de Texto")
 
+# Colores
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
 
+# Fuente
+font = pygame.font.SysFont(None, 36)
 
+# Texto original y traducciones predefinidas
+original_text = "Hola, ¿cómo estás?"
+translations = {
+    "Chino": "你好，你好吗？",
+    "Japonés": "こんにちは、お元気ですか？",
+    "Alemán": "Hallo, wie geht's dir?",
+    "Francés": "Bonjour, comment ça va?"
+}
 
+# Bucle principal
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # Dibujar en la pantalla
+    screen.fill(WHITE)
+    
+    y_offset = 50
+    original_render = font.render(f"Original: {original_text}", True, BLACK)
+    screen.blit(original_render, (50, y_offset))
+    y_offset += 60
+
+    for lang, translation in translations.items():
+        lang_text = font.render(f"{lang}: {translation}", True, BLACK)
+        screen.blit(lang_text, (50, y_offset))
+        y_offset += 60
+
+    pygame.display.flip()
+
+pygame.quit()
+"""

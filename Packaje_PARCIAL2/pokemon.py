@@ -250,7 +250,7 @@ while flag == True:
                     pygame.display.update()
                     pygame.time.wait(2000)
                     COLOR_CUADRO_TEXTO = BLANCO
-                    nombre_pokemon, silueta_aleatoria, pokemon_resuleto, generacion_pokemon = cargar_nuevo_pokemon(pokemones, ancho_cuadro_imagen, alto_cuadro_imagen)
+                    nombre_pokemon, silueta_aleatoria, pokemon_resuleto, generacion_pokemon = cargar_nuevo_pokemon(pokemones, ancho_cuadro_imagen, alto_cuadro_imagen, primera_iteracion, pokemones_gen_1, pokemones_gen_2, pokemones_gen_3)
                     texto_ingresado = ""
 
                 else:
@@ -310,7 +310,7 @@ while flag == True:
                         pygame.display.update()
                         pygame.time.wait(2000)
 
-                        nombre_pokemon, silueta_aleatoria, pokemon_resuleto, generacion_pokemon = cargar_nuevo_pokemon(pokemones, ancho_cuadro_imagen, alto_cuadro_imagen)
+                        nombre_pokemon, silueta_aleatoria, pokemon_resuleto, generacion_pokemon = cargar_nuevo_pokemon(pokemones, ancho_cuadro_imagen, alto_cuadro_imagen, primera_iteracion, pokemones_gen_1, pokemones_gen_2, pokemones_gen_3)
     
                     else:
                         COLOR_BOTON = GRIS_CLARO

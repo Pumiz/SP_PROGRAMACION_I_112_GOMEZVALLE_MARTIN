@@ -62,13 +62,29 @@ alto_caja_seleccion_gen = 110
 posicion_caja_selec_gen_x = 0
 posicion_caja_selec_gen_y = 0
 
+ancho_caja_puntaje = 220
+alto_caja_puntaje = 220
+
+posicion_caja_puntaje_x = ANCHO_VENTANA - ancho_caja_puntaje
+posicion_caja_puntaje_y = 0
+
+
+ancho_caja_racha_actual = 180
+alto_caja_racha_actual = 65
+
+posicion_caja_racha_actual_x = ANCHO_VENTANA - (ancho_caja_racha_actual + 20)
+posicion_caja_racha_actual_y = 40
+
+posicion_caja_mejor_racha_x = ANCHO_VENTANA - (ancho_caja_racha_actual + 20)
+posicion_caja_mejor_racha_y = 40 + alto_caja_racha_actual + 20
+
 posicion_boton_x = (ANCHO_VENTANA - ancho_boton) // 2
 
 lista_de_imagenes = []
 
 #-------------------Ventana Principal-----------------
 ventana = pygame.display.set_mode(TAMAÑO_VENTANA)
-pygame.display.set_caption("¿Quien es ese Pokemon?") 
+pygame.display.set_caption("¿Quien es ese Pokémon?") 
 
 #------------------------Icono------------------------
 icono = pygame.image.load("Packaje_PARCIAL2\pikachu.png")
@@ -77,7 +93,7 @@ pygame.display.set_icon(icono)
 #------------------------Fuentes----------------------
 #titulo
 fuente = pygame.font.SysFont("Consolas", 40)
-titulo = fuente.render("¿Quien es ese Pokemón?", True, BLANCO)
+titulo = fuente.render("¿Quién es ese Pokémon?", True, BLANCO)
 titulo_rect = titulo.get_rect()
 titulo_rect.center = (ANCHO_VENTANA // 2, 60)
 
@@ -109,6 +125,7 @@ cuadro_selec_gen = pygame.Rect(posicion_caja_selec_gen_x, posicion_caja_selec_ge
 fuente_gen = pygame.font.SysFont("Consolas", 30)
 texto_gen = fuente_gen.render("Generaciones", True, NEGRO)
 texto_rect_gen = texto_gen.get_rect()
+texto_rect_gen.midtop = (cuadro_selec_gen.midtop)
 
 fuente_boton = pygame.font.SysFont("Consolas", 40)
 texto_boton_gen_1 = fuente_boton.render("1", True, NEGRO)
@@ -132,9 +149,31 @@ boton_gen_3 = pygame.Rect(posicion_botones_generaciones_x + (ancho_boton_generac
                         posicion_botones_generaciones_y, ancho_boton_generaciones, alto_boton_generaciones)
 texto_rect_gen_3.center = (boton_gen_3.center)
 
-desactivar_gen_1 = True
-desactivar_gen_2 = False
-desactivar_gen_3 = False
+eneable_gen_1 = True
+eneable_gen_2 = False
+eneable_gen_3 = False
+
+
+#----------------Tabla de puntos----------------------
+cuadro_racha = pygame.Rect(posicion_caja_puntaje_x, posicion_caja_puntaje_y, ancho_caja_puntaje, alto_caja_puntaje)
+titulo_tabla_puntos = fuente_gen.render("Racha", True, NEGRO)
+rect_titulo_tabla_puntos = titulo_tabla_puntos.get_rect()
+rect_titulo_tabla_puntos.midtop = (cuadro_racha.midtop)
+
+cuadro_racha_actual = pygame.Rect(posicion_caja_racha_actual_x, posicion_caja_racha_actual_y, ancho_caja_racha_actual, alto_caja_racha_actual)
+titulo_puntos = fuente_gen.render("Actual: ", True, NEGRO)
+rect_titulo_puntos = titulo_puntos.get_rect()
+rect_titulo_puntos.midleft = (cuadro_racha_actual.midleft)
+
+
+cuadro_mejor_racha = pygame.Rect(posicion_caja_mejor_racha_x, posicion_caja_mejor_racha_y, ancho_caja_racha_actual, alto_caja_racha_actual)
+titulo_mejor_racha = fuente_gen.render("Mejor: ", True, NEGRO)
+rect_titulo_mejor_racha = titulo_mejor_racha.get_rect()
+rect_titulo_mejor_racha.midleft = (cuadro_mejor_racha.midleft)
+
+
+#titulo_mejor_tiempo = fuente.render("Mejor Tiempo: ", True, NEGRO)
+#titulo_promedio_tiempo = fuente.render("Promedio Tiempo: ", True, NEGRO)
 
 #----------------carga de imagen oculta----------------
 path = "Packaje_PARCIAL2\\Imagenes_pokemones.json"
@@ -186,12 +225,19 @@ pokemones_gen_1, pokemones_gen_2, pokemones_gen_3 = separar_por_gen(pokemones)
 primera_iteracion = True #cerrar cuando deseleccione la gen 1
 
 
-def cargar_nuevo_pokemon(pokemones: list, ancho_cuadro_imagen: int, alto_cuadro_imagen: int, primera_iteracion: bool, lista_gen1, lista_gen2, lista_gen3) -> str: #state_gen_1: bool, state_gen_3: bool, state_gen_2: bool
-    # Selección aleatoria de un Pokémon solo de la gen 1
+def cargar_nuevo_pokemon(pokemones: list, ancho_cuadro_imagen: int, alto_cuadro_imagen: int, primera_iteracion: bool,lista_gen1, lista_gen2, lista_gen3, eneable_gen_1: bool, eneable_gen_2: bool, eneable_gen_3: bool) -> str:
     pokemones = []
-    if primera_iteracion: 
-        pokemones = lista_gen1
-    #elif and eneable de cada generacion
+    if eneable_gen_1:
+        if eneable_gen_2 and eneable_gen_3:
+            pokemones = lista_gen1 + lista_gen2 + lista_gen3
+        elif eneable_gen_2:
+            pokemones = lista_gen1 + lista_gen2
+        else:
+            pokemones = lista_gen1
+    elif eneable_gen_2:
+        pokemones = lista_gen2
+    else:
+        pokemones = []
 
     pokemon_actual = random.choice(pokemones)
     ruta_imagen_normal = pokemon_actual['imagen_normal']
@@ -221,9 +267,13 @@ def pantalla_inicial():
     ventana.blit(texto_boton_gen_2, texto_rect_gen_2)
     ventana.blit(texto_boton_gen_3, texto_rect_gen_3)
 
+    ventana.blit(titulo_tabla_puntos, rect_titulo_tabla_puntos) #Titulo tabla puntos
+    ventana.blit(titulo_puntos, rect_titulo_puntos) #Titulo racha actual
+    ventana.blit(titulo_mejor_racha, rect_titulo_mejor_racha) #Titulo mejor racha
+
 clock = pygame.time.Clock()
 
-nombre_pokemon, silueta_aleatoria, pokemon_resuleto, generacion_pokemon = cargar_nuevo_pokemon(pokemones, ancho_cuadro_imagen, alto_cuadro_imagen, primera_iteracion, pokemones_gen_1, pokemones_gen_2, pokemones_gen_3)
+nombre_pokemon, silueta_aleatoria, pokemon_resuleto, generacion_pokemon = cargar_nuevo_pokemon(pokemones, ancho_cuadro_imagen, alto_cuadro_imagen, primera_iteracion, pokemones_gen_1, pokemones_gen_2, pokemones_gen_3, eneable_gen_1, eneable_gen_2, eneable_gen_3)
 
 flag = True
 while flag == True:
@@ -250,7 +300,7 @@ while flag == True:
                     pygame.display.update()
                     pygame.time.wait(2000)
                     COLOR_CUADRO_TEXTO = BLANCO
-                    nombre_pokemon, silueta_aleatoria, pokemon_resuleto, generacion_pokemon = cargar_nuevo_pokemon(pokemones, ancho_cuadro_imagen, alto_cuadro_imagen, primera_iteracion, pokemones_gen_1, pokemones_gen_2, pokemones_gen_3)
+                    nombre_pokemon, silueta_aleatoria, pokemon_resuleto, generacion_pokemon = cargar_nuevo_pokemon(pokemones, ancho_cuadro_imagen, alto_cuadro_imagen, primera_iteracion, pokemones_gen_1, pokemones_gen_2, pokemones_gen_3, eneable_gen_1, eneable_gen_2, eneable_gen_3)
                     texto_ingresado = ""
 
                 else:
@@ -264,28 +314,28 @@ while flag == True:
         elif evento.type == pygame.MOUSEBUTTONDOWN:
                 if evento.button == 1:  #boton izq 
                     # Boton selecionar generacion 1 por defecto activo
-                    if boton_gen_1.collidepoint(evento.pos) and desactivar_gen_1:
+                    if boton_gen_1.collidepoint(evento.pos) and eneable_gen_1:
                         COLOR_BOTON_GEN_1 = ROJO
-                        desactivar_gen_1 = False
-                    elif boton_gen_1.collidepoint(evento.pos) and desactivar_gen_1 ==  False:
+                        eneable_gen_1 = False
+                    elif boton_gen_1.collidepoint(evento.pos) and eneable_gen_1 ==  False:
                         COLOR_BOTON_GEN_1 = VERDE
-                        desactivar_gen_1 = True
+                        eneable_gen_1 = True
                     
                     # Boton selecionar generacion 2 por defecto desactivado
-                    if boton_gen_2.collidepoint(evento.pos) and desactivar_gen_2 == False:
+                    if boton_gen_2.collidepoint(evento.pos) and eneable_gen_2 == False:
                         COLOR_BOTON_GEN_2 = VERDE 
-                        desactivar_gen_2 = True
-                    elif boton_gen_2.collidepoint(evento.pos) and desactivar_gen_2:
+                        eneable_gen_2 = True
+                    elif boton_gen_2.collidepoint(evento.pos) and eneable_gen_2:
                         COLOR_BOTON_GEN_2 = ROJO 
-                        desactivar_gen_2 = False
+                        eneable_gen_2 = False
 
                     # Boton selecionar generacion 3 por defecto desactivado
-                    if boton_gen_3.collidepoint(evento.pos) and desactivar_gen_3 == False:
+                    if boton_gen_3.collidepoint(evento.pos) and eneable_gen_3 == False:
                         COLOR_BOTON_GEN_3 = VERDE 
-                        desactivar_gen_3 = True
-                    elif boton_gen_3.collidepoint(evento.pos) and desactivar_gen_3:
+                        eneable_gen_3 = True
+                    elif boton_gen_3.collidepoint(evento.pos) and eneable_gen_3:
                         COLOR_BOTON_GEN_3 = ROJO 
-                        desactivar_gen_3 = False 
+                        eneable_gen_3 = False 
                     
                     # Boton escribir nombre
                     if cuadro_de_texto.collidepoint(evento.pos):    #verifico si presione el boton izq del mouse dentro del cuadro de texto. evento.pos devuelve las coordenadas del mouse
@@ -310,7 +360,7 @@ while flag == True:
                         pygame.display.update()
                         pygame.time.wait(2000)
 
-                        nombre_pokemon, silueta_aleatoria, pokemon_resuleto, generacion_pokemon = cargar_nuevo_pokemon(pokemones, ancho_cuadro_imagen, alto_cuadro_imagen, primera_iteracion, pokemones_gen_1, pokemones_gen_2, pokemones_gen_3)
+                        nombre_pokemon, silueta_aleatoria, pokemon_resuleto, generacion_pokemon = cargar_nuevo_pokemon(pokemones, ancho_cuadro_imagen, alto_cuadro_imagen, primera_iteracion, pokemones_gen_1, pokemones_gen_2, pokemones_gen_3, eneable_gen_1, eneable_gen_2, eneable_gen_3)
     
                     else:
                         COLOR_BOTON = GRIS_CLARO
@@ -319,6 +369,10 @@ while flag == True:
     ventana.fill(COLOR_FONDO)
 
     pygame.draw.rect(ventana, COLOR_CUADRO_TEXTO, cuadro_de_texto, border_radius=12)  # relleno del cuadro texto
+    #pygame.draw.rect(ventana, BLANCO, cuadro_mejor_racha, border_radius=12)  # relleno de la table de puntos
+    pygame.draw.rect(ventana, BLANCO, cuadro_racha, border_radius=12)  # relleno de la table de puntos
+    pygame.draw.rect(ventana, AZUL_CLARO, cuadro_racha_actual, border_radius=8)  # relleno de la table de puntos
+    pygame.draw.rect(ventana, AZUL_CLARO, cuadro_mejor_racha, border_radius=8)  # relleno de la table de puntos
 
     pygame.draw.rect(ventana, COLOR_CUADRO_IMAGEN, cuadro_de_imagen)    # relleno del cuadro de imagen principal
 

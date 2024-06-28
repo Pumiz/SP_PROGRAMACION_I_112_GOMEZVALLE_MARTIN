@@ -176,7 +176,7 @@ rect_titulo_mejor_racha.midleft = (cuadro_mejor_racha.midleft)
 #titulo_promedio_tiempo = fuente.render("Promedio Tiempo: ", True, NEGRO)
 
 #----------------carga de imagen oculta----------------
-path = "Packaje_PARCIAL2\\Imagenes_pokemones.json"
+path = r"SP_PROGRAMACION_I_112_GRUPO_6_GOMEZVALLE_MARTIN_CRISTIAN_PENTITO/Packaje_PARCIAL2/Imagenes_pokemones.json"
 with open(path, "r") as archivo:
     json_pokemones = json.load(archivo)
 
@@ -217,7 +217,7 @@ def separar_por_gen(lista_pokemones: list):
         elif generacion_actual == "2gen":
             lista_gen2.append(lista_pokemones[i])
         else:
-            lista_gen2.append(lista_pokemones[i])
+            lista_gen3.append(lista_pokemones[i])
     return lista_gen1, lista_gen2, lista_gen3
 
 pokemones_gen_1, pokemones_gen_2, pokemones_gen_3 = separar_por_gen(pokemones)

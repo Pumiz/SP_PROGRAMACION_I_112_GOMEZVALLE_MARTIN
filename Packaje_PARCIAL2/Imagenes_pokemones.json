@@ -1,167 +1,304 @@
 {
+    
     "alakazam": {
         "generacion": "1gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\alakazam.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\alakazam_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\alakazam_black.png",
+        "frances": "Alakazam",
+        "italiano": "Alakazam",
+        "aleman": "Simsala",
+        "ingles": "Alakazam"
     },
     "bulbasaur": {
         "generacion": "1gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\bulbasaur.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\bulbasaur_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\bulbasaur_black.png",
+        "frances": "Bulbizarre",
+        "italiano": "Bulbasaur",
+        "aleman": "Bisasam",
+        "ingles": "Bulbasaur"
     },
     "charmeleon": {
         "generacion": "1gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\charmeleon.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\charmeleon_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\charmeleon_black.png",
+        "frances": "Reptincel",
+        "italiano": "Charmeleon",
+        "aleman": "Glutexo",
+        "ingles": "Charmeleon"
     },
     "dratini": {
         "generacion": "1gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\dratini.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\dratini_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\dratini_black.png",
+        "frances": "Minidraco",
+        "italiano": "Dratini",
+        "aleman": "Dratini",
+        "ingles": "Dratini"
     },
     "ivysaur": {
         "generacion": "1gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\ivysaur.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\ivysaur_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\ivysaur_black.png",
+        "frances": "Herbizarre",
+        "italiano": "Ivysaur",
+        "aleman": "Bisaknosp",
+        "ingles": "Ivysaur"
     },
     "meowth": {
         "generacion": "1gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\meowth.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\meowth_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\meowth_black.png",
+        "frances": "Miaouss",
+        "italiano": "Meowth",
+        "aleman": "Mauzi",
+        "ingles": "Meowth"
     },
     "mew": {
         "generacion": "1gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\mew.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\mew_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\mew_black.png",
+        "frances": "Mew",
+        "italiano": "Mew",
+        "aleman": "Mew",
+        "ingles": "Mew"
     },
     "pidgey": {
         "generacion": "1gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\pidgey.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\pidgey_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\pidgey_black.png",
+        "frances": "Roucool",
+        "italiano": "Pidgey",
+        "aleman": "Taubsi",
+        "ingles": "Pidgey"
     },
     "pikachu": {
         "generacion": "1gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\pikachu.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\pikachu_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\pikachu_black.png",
+        "frances": "Pikachu",
+        "italiano": "Pikachu",
+        "aleman": "Pikachu",
+        "ingles": "Pikachu"
     },
     "vaporeon": {
         "generacion": "1gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\vaporeon.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\vaporeon_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\vaporeon_black.png",
+        "frances": "Aquali",
+        "italiano": "Vaporeon",
+        "aleman": "Aquana",
+        "ingles": "Vaporeon"
     },
     "vulpix": {
         "generacion": "1gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\vulpix.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\vulpix_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\vulpix_black.png",
+        "frances": "Goupix",
+        "italiano": "Vulpix",
+        "aleman": "Vulpix",
+        "ingles": "Vulpix"
     },
     "celebi": {
         "generacion": "2gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\celebi.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\celebi_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\celebi_black.png",
+        "frances": "Celebi",
+        "italiano": "Celebi",
+        "aleman": "Celebi",
+        "ingles": "Celebi"
     },
     "chikorita": {
         "generacion": "2gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\chikorita.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\chikorita_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\chikorita_black.png",
+        "frances": "Germignon",
+        "italiano": "Chikorita",
+        "aleman": "Endivie",
+        "ingles": "Chikorita"
     },
     "cyndaquil": {
         "generacion": "2gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\cyndaquil.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\cyndaquil_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\cyndaquil_black.png",
+        "frances": "Héricendre",
+        "italiano": "Cyndaquil",
+        "aleman": "Feurigel",
+        "ingles": "Cyndaquil"
     },
     "feligatr": {
         "generacion": "2gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\feligatr.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\feligatr_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\feligatr_black.png",
+        "frances": "Aligatueur",
+        "italiano": "Feraligatr",
+        "aleman": "Impergator",
+        "ingles": "Feraligatr"
     },
     "granbull": {
         "generacion": "2gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\granbull.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\granbull_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\granbull_black.png",
+        "frances": "Granbull",
+        "italiano": "Granbull",
+        "aleman": "Granbull",
+        "ingles": "Granbull"
     },
     "heracross": {
         "generacion": "2gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\heracross.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\heracross_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\heracross_black.png",
+        "frances": "Scarhino",
+        "italiano": "Heracross",
+        "aleman": "Skaraborn",
+        "ingles": "Heracross"
     },
     "mantine": {
         "generacion": "2gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\mantine.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\mantine_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\mantine_black.png",
+        "frances": "Démanta",
+        "italiano": "Mantine",
+        "aleman": "Mantax",
+        "ingles": "Mantine"
     },
     "octillery": {
         "generacion": "2gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\octillery.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\octillery_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\octillery_black.png",
+        "frances": "Octillery",
+        "italiano": "Octillery",
+        "aleman": "Octillery",
+        "ingles": "Octillery"
     },
     "steelix": {
         "generacion": "2gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\steelix.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\steelix_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\steelix_black.png",
+        "frances": "Steelix",
+        "italiano": "Steelix",
+        "aleman": "Stahlos",
+        "ingles": "Steelix"
     },
+    
     "totodile": {
         "generacion": "2gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\totodile.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\totodile_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\totodile_black.png",
+        "frances": "Kaiminus",
+        "italiano": "Totodile",
+        "aleman": "Karnimani",
+        "ingles": "Totodile"
     },
     "umbreon": {
         "generacion": "2gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\umbreon.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\umbreon_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\2gen\\umbreon_black.png",
+        "frances": "Noctali",
+        "italiano": "Umbreon",
+        "aleman": "Nachtara",
+        "ingles": "Umbreon"
     },
     "aron": {
         "generacion": "3gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\aron.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\aron_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\aron_black.png",
+        "frances": "Galekid",
+        "italiano": "Aron",
+        "aleman": "Stollunior",
+        "ingles": "Aron"
     },
     "cascoon": {
         "generacion": "3gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\cascoon.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\cascoon_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\cascoon_black.png",
+        "frances": "Armulys",
+        "italiano": "Cascoon",
+        "aleman": "Panekon",
+        "ingles": "Cascoon"
     },
     "lombre": {
         "generacion": "3gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\lombre.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\lombre_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\lombre_black.png",
+        "frances": "Lombre",
+        "italiano": "Lombre",
+        "aleman": "Lombrero",
+        "ingles": "Lombre"
     },
     "mudkip": {
         "generacion": "3gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\mudkip.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\mudkip_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\mudkip_black.png",
+        "frances": "Gobou",
+        "italiano": "Mudkip",
+        "aleman": "Hydropi",
+        "ingles": "Mudkip"
     },
     "ninjask": {
         "generacion": "3gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\ninjask.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\ninjask_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\ninjask_black.png",
+        "frances": "Ninjask",
+        "italiano": "Ninjask",
+        "aleman": "Ninjask",
+        "ingles": "Ninjask"
     },
     "surskit": {
         "generacion": "3gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\surskit.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\surskit_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\surskit_black.png",
+        "frances": "Arakdo",
+        "italiano": "Surskit",
+        "aleman": "Gehweiher",
+        "ingles": "Surskit"
     },
     "taillow": {
         "generacion": "3gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\taillow.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\taillow_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\taillow_black.png",
+        "frances": "Nirondelle",
+        "italiano": "Taillow",
+        "aleman": "Schwalbini",
+        "ingles": "Taillow"
     },
     "torchic": {
         "generacion": "3gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\torchic.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\torchic_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\torchic_black.png",
+        "frances": "Poussifeu",
+        "italiano": "Torchic",
+        "aleman": "Flemmli",
+        "ingles": "Torchic"
     },
     "treecko": {
         "generacion": "3gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\treecko.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\treecko_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\treecko_black.png",
+        "frances": "Arcko",
+        "italiano": "Treecko",
+        "aleman": "Geckarbor",
+        "ingles": "Treecko"
     },
     "whismur": {
         "generacion": "3gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\whismur.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\whismur_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\whismur_black.png",
+        "frances": "Chuchmur",
+        "italiano": "Whismur",
+        "aleman": "Flurmel",
+        "ingles": "Whismur"
     },
     "wingull": {
         "generacion": "3gen",
         "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\wingull.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\wingull_black.png"
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\3gen\\wingull_black.png",
+        "frances": "Goélise",
+        "italiano": "Wingull",
+        "aleman": "Wingull",
+        "ingles": "Wingull"
     }
-}
+}   
+    
+    
+    

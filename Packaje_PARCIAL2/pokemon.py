@@ -217,7 +217,7 @@ def separar_por_gen(lista_pokemones: list):
         elif generacion_actual == "2gen":
             lista_gen2.append(lista_pokemones[i])
         else:
-            lista_gen2.append(lista_pokemones[i])
+            lista_gen3.append(lista_pokemones[i])
     return lista_gen1, lista_gen2, lista_gen3
 
 pokemones_gen_1, pokemones_gen_2, pokemones_gen_3 = separar_por_gen(pokemones)

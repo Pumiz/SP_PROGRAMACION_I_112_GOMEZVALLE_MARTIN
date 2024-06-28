@@ -222,22 +222,34 @@ def separar_por_gen(lista_pokemones: list):
 
 pokemones_gen_1, pokemones_gen_2, pokemones_gen_3 = separar_por_gen(pokemones)
 
-primera_iteracion = True #cerrar cuando deseleccione la gen 1
 
-
-def cargar_nuevo_pokemon(pokemones: list, ancho_cuadro_imagen: int, alto_cuadro_imagen: int, primera_iteracion: bool,lista_gen1, lista_gen2, lista_gen3, eneable_gen_1: bool, eneable_gen_2: bool, eneable_gen_3: bool) -> str:
+def cargar_nuevo_pokemon(pokemones: list, ancho_cuadro_imagen: int, alto_cuadro_imagen: int,lista_gen1, lista_gen2, lista_gen3, eneable_gen_1: bool, eneable_gen_2: bool, eneable_gen_3: bool) -> str:
     pokemones = []
     if eneable_gen_1:
         if eneable_gen_2 and eneable_gen_3:
             pokemones = lista_gen1 + lista_gen2 + lista_gen3
         elif eneable_gen_2:
             pokemones = lista_gen1 + lista_gen2
+        elif eneable_gen_3:
+            pokemones = lista_gen1 + lista_gen3
         else:
             pokemones = lista_gen1
-    elif eneable_gen_2:
-        pokemones = lista_gen2
-    else:
-        pokemones = []
+    
+    if eneable_gen_2:
+        if eneable_gen_3:
+            pokemones = lista_gen2 + lista_gen3
+        else:
+            pokemones = lista_gen2
+    
+    if eneable_gen_3:
+        if eneable_gen_2 and eneable_gen_3:
+            pokemones = lista_gen1 + lista_gen2 + lista_gen3
+        elif eneable_gen_2:
+            pokemones = lista_gen1 + lista_gen2
+        else:
+            pokemones = lista_gen3
+
+    
 
     pokemon_actual = random.choice(pokemones)
     ruta_imagen_normal = pokemon_actual['imagen_normal']
@@ -273,7 +285,7 @@ def pantalla_inicial():
 
 clock = pygame.time.Clock()
 
-nombre_pokemon, silueta_aleatoria, pokemon_resuleto, generacion_pokemon = cargar_nuevo_pokemon(pokemones, ancho_cuadro_imagen, alto_cuadro_imagen, primera_iteracion, pokemones_gen_1, pokemones_gen_2, pokemones_gen_3, eneable_gen_1, eneable_gen_2, eneable_gen_3)
+nombre_pokemon, silueta_aleatoria, pokemon_resuleto, generacion_pokemon = cargar_nuevo_pokemon(pokemones, ancho_cuadro_imagen, alto_cuadro_imagen, pokemones_gen_1, pokemones_gen_2, pokemones_gen_3, eneable_gen_1, eneable_gen_2, eneable_gen_3)
 
 flag = True
 while flag == True:
@@ -300,7 +312,7 @@ while flag == True:
                     pygame.display.update()
                     pygame.time.wait(2000)
                     COLOR_CUADRO_TEXTO = BLANCO
-                    nombre_pokemon, silueta_aleatoria, pokemon_resuleto, generacion_pokemon = cargar_nuevo_pokemon(pokemones, ancho_cuadro_imagen, alto_cuadro_imagen, primera_iteracion, pokemones_gen_1, pokemones_gen_2, pokemones_gen_3, eneable_gen_1, eneable_gen_2, eneable_gen_3)
+                    nombre_pokemon, silueta_aleatoria, pokemon_resuleto, generacion_pokemon = cargar_nuevo_pokemon(pokemones, ancho_cuadro_imagen, alto_cuadro_imagen, pokemones_gen_1, pokemones_gen_2, pokemones_gen_3, eneable_gen_1, eneable_gen_2, eneable_gen_3)
                     texto_ingresado = ""
 
                 else:
@@ -360,7 +372,7 @@ while flag == True:
                         pygame.display.update()
                         pygame.time.wait(2000)
 
-                        nombre_pokemon, silueta_aleatoria, pokemon_resuleto, generacion_pokemon = cargar_nuevo_pokemon(pokemones, ancho_cuadro_imagen, alto_cuadro_imagen, primera_iteracion, pokemones_gen_1, pokemones_gen_2, pokemones_gen_3, eneable_gen_1, eneable_gen_2, eneable_gen_3)
+                        nombre_pokemon, silueta_aleatoria, pokemon_resuleto, generacion_pokemon = cargar_nuevo_pokemon(pokemones, ancho_cuadro_imagen, alto_cuadro_imagen, pokemones_gen_1, pokemones_gen_2, pokemones_gen_3, eneable_gen_1, eneable_gen_2, eneable_gen_3)
     
                     else:
                         COLOR_BOTON = GRIS_CLARO

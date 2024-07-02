@@ -90,10 +90,10 @@
         "aleman": "Aquana",
         "ingles": "Vaporeon"
     },
-    "vulpix": {
+    "evee": {
         "generacion": "1gen",
-        "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\vulpix.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\vulpix_black.png",
+        "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\evee.png",
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\evee_black.png",
         "frances": "Goupix",
         "italiano": "Vulpix",
         "aleman": "Vulpix",

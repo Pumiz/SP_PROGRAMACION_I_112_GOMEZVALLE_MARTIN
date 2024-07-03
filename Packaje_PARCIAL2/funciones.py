@@ -149,30 +149,28 @@ def idiomas_pokemon(ventana, fuente, color_texto, color_caja,posicion_x, posicio
     ventana.blit(titulo_italiano, rect_titulo_italiano) #nombre italiano
     ventana.blit(titulo_aleman, rect_titulo_aleman) #nombre aleman
 
-"""
-def blitear_objeto(nombre_ventana, texto, rectangulo):
-    nombre_ventana.blit(texto, rectangulo) # no lo conozco
+def mejorar_racha(path, racha_actual: int):
+    with open(path, "r") as archivo:
+        racha_csv = archivo.read()
+        racha_csv.strip()
+        racha_csv = int(racha_csv)
+    nueva_racha = racha_csv
+
+    if racha_actual > racha_csv:
+        with open(path, "w") as archivo:
+            archivo.write(str(racha_actual) + '\n')
+            nueva_racha = racha_actual
+    return racha_csv, nueva_racha
 
 
-def pantalla_inicial(nombre_ventana, ):
-    #Se puede hacer con una matriz para no recibir todo por parametro
+def blitear_objetos(ventana, matriz_objetos, texto, cuadro_texto):
     texto_rect = texto.get_rect()
-    texto_rect.center = cuadro_de_texto.center
-    nombre_ventana.blit(texto, texto_rect)  # texto del cuadro de texto
+    texto_rect.center = cuadro_texto.center
+    ventana.blit(texto, texto_rect)  # texto del cuadro de texto
 
-    nombre_ventana.blit(titulo, titulo_rect)  # titulo
-    nombre_ventana.blit(texto_boton, boton_rect) # no lo conozco
+    for elemento in matriz_objetos:
+        ventana.blit(elemento[0], elemento[1])
 
-    nombre_ventana.blit(texto_gen, texto_rect_gen)  # titulo generaciones
-    nombre_ventana.blit(texto_boton_gen_1, texto_rect_gen_1)
-    nombre_ventana.blit(texto_boton_gen_2, texto_rect_gen_2)
-    nombre_ventana.blit(texto_boton_gen_3, texto_rect_gen_3)
-
-    nombre_ventana.blit(titulo_tabla_puntos, rect_titulo_tabla_puntos) #Titulo tabla puntos
-    nombre_ventana.blit(titulo_puntos, rect_titulo_puntos) #Titulo racha actual
-    nombre_ventana.blit(titulo_mejor_racha, rect_titulo_mejor_racha) #Titulo mejor racha
-    
-    nombre_ventana.blit(titulo_frances, rect_titulo_frances) #nombre frances
-    nombre_ventana.blit(titulo_italiano, rect_titulo_italiano) #nombre italiano
-    nombre_ventana.blit(titulo_aleman, rect_titulo_aleman) #nombre aleman
-"""
+def dibujar_rectangulos(ventana, matriz_draw):
+    for color, rect, border_radius in matriz_draw:
+        pygame.draw.rect(ventana, color, rect, border_radius=border_radius)

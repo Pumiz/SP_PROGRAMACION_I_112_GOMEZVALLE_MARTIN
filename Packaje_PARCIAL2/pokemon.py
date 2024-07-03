@@ -7,7 +7,8 @@ pygame.init()
 
 pokemones = []
 
-with open("Packaje_PARCIAL2\\Imagenes_pokemones.json", "r") as archivo:
+with open(r"SP_PROGRAMACION_I_112_GRUPO_6_GOMEZVALLE_MARTIN_CRISTIAN_PENTITO\Packaje_PARCIAL2\Imagenes_pokemones.json", "r") as archivo:
+#with open("Packaje_PARCIAL2\\Imagenes_pokemones.json", "r") as archivo:
     json_pokemones = json.load(archivo)
     pokemones = cargar_pokemones_en_lista(pokemones, json_pokemones)
 
@@ -18,7 +19,7 @@ ventana = pygame.display.set_mode(TAMAÑO_VENTANA)
 pygame.display.set_caption("¿Quien es ese Pokémon?") 
 
 #------------------------Icono------------------------
-icono = pygame.image.load("Packaje_PARCIAL2\pikachu.png")
+icono = pygame.image.load(r"SP_PROGRAMACION_I_112_GRUPO_6_GOMEZVALLE_MARTIN_CRISTIAN_PENTITO\Packaje_PARCIAL2\pikachu.png")
 pygame.display.set_icon(icono)
 
 #------------------------Fuentes texto----------------------
@@ -31,7 +32,7 @@ fuente_idiomas = pygame.font.SysFont("Arial", 18)
 
 
 #------------------------Foto Titulo------------------------
-imagen_titulo = pygame.image.load("Packaje_PARCIAL2\Imagenes_pokemones\quien.png")
+imagen_titulo = pygame.image.load(r"SP_PROGRAMACION_I_112_GRUPO_6_GOMEZVALLE_MARTIN_CRISTIAN_PENTITO\Packaje_PARCIAL2\Imagenes_pokemones\quien.png")
 imagen_titulo = pygame.transform.scale(imagen_titulo, (400,180))
 #titulo = fuente.render("¿Quién es ese Pokémon?", True, NEGRO)
 #titulo_rect = titulo.get_rect()
@@ -39,7 +40,7 @@ imagen_titulo = pygame.transform.scale(imagen_titulo, (400,180))
 
 
 #----------------Imagen de Fondo----------------------
-# imagen = pygame.image.load(r"Packaje_PARCIAL2\fondo_pokemon.jpg")
+fondo_ventana = pygame.image.load(r"SP_PROGRAMACION_I_112_GRUPO_6_GOMEZVALLE_MARTIN_CRISTIAN_PENTITO\Packaje_PARCIAL2\imagenes_fondo\fondo pokemon.jpg")
 # imagen = pygame.transform.scale(imagen, (1000,800))
 
 #----------------Rectangulo de Imagen-------------------
@@ -75,7 +76,7 @@ texto_dificil, boton_dificil, texto_rect_dificil = crear_texto_en_caja("Dificil"
 #----------------Tabla de puntos----------------------
 contador = 0
 incrementar_rachas = lambda contador: contador + 1
-racha_csv, nueva_racha = mejorar_racha("Packaje_PARCIAL2\mejor_racha.csv", 0)
+racha_csv, nueva_racha = mejorar_racha(r"SP_PROGRAMACION_I_112_GRUPO_6_GOMEZVALLE_MARTIN_CRISTIAN_PENTITO\Packaje_PARCIAL2\mejor_racha.csv", 0)
 
 titulo_tabla_puntos, rect_titulo_tabla_puntos = crear_texto_rect("Racha", fuente_gen, NEGRO)
 cuadro_racha = crear_rectangulo_objeto(posicion_caja_puntaje_x, posicion_caja_puntaje_y, ancho_caja_puntaje, alto_caja_puntaje, True, "midtop", rect_titulo_tabla_puntos)
@@ -88,7 +89,7 @@ titulo_mejor_racha, cuadro_mejor_racha, rect_titulo_mejor_racha = crear_texto_en
 #titulo_promedio_tiempo = fuente.render("Promedio Tiempo: ", True, NEGRO)
 
 #----------------Carga de Pokemones----------------
-path = "Packaje_PARCIAL2\\Imagenes_pokemones.json"
+path = r"SP_PROGRAMACION_I_112_GRUPO_6_GOMEZVALLE_MARTIN_CRISTIAN_PENTITO\Packaje_PARCIAL2\Imagenes_pokemones.json"
 with open(path, "r") as archivo:
     json_pokemones = json.load(archivo)
 
@@ -127,7 +128,7 @@ while flag == True:
         [titulo_puntos, rect_titulo_puntos],
         [titulo_mejor_racha, rect_titulo_mejor_racha],
     ]
-
+    
     lista_eventos = pygame.event.get()      
     for evento in lista_eventos:
         if evento.type == pygame.QUIT:      
@@ -141,7 +142,7 @@ while flag == True:
                 if texto_ingresado.lower() == atributos_pokemon[0].lower():
                     contador = incrementar_rachas(contador)
                     print("coincidencia")
-                    mejor_racha, racha = mejorar_racha("Packaje_PARCIAL2\mejor_racha.csv", contador)
+                    mejor_racha, racha = mejorar_racha(r"SP_PROGRAMACION_I_112_GRUPO_6_GOMEZVALLE_MARTIN_CRISTIAN_PENTITO\Packaje_PARCIAL2\mejor_racha.csv", contador)
                     # Actualizar el texto del contador actual
                     titulo_puntos, cuadro_racha_actual, rect_titulo_puntos = crear_texto_en_caja("Actual: " + str(contador), fuente_gen, NEGRO, ancho_caja_racha_actual, alto_caja_racha_actual, cuadro_racha, "center", "midleft")
                     titulo_mejor_racha, cuadro_mejor_racha, rect_titulo_mejor_racha = crear_texto_en_caja("Mejor:  " + str(racha), fuente_gen, NEGRO, ancho_caja_racha_actual, alto_caja_racha_actual,cuadro_racha, "midbottom", "midleft")
@@ -242,7 +243,9 @@ while flag == True:
 
 
     
-    ventana.fill(COLOR_FONDO)
+    #ventana.fill(COLOR_FONDO)
+    ventana.blit(fondo_ventana, (0, 0))
+    fondo_ventana = pygame.transform.scale(fondo_ventana, TAMAÑO_VENTANA)
 
     matriz_draws = [
         [COLOR_CUADRO_TEXTO, cuadro_de_texto, 12],

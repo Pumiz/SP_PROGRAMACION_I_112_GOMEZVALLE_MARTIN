@@ -90,14 +90,14 @@
         "aleman": "Aquana",
         "ingles": "Vaporeon"
     },
-    "evee": {
+    "eevee": {
         "generacion": "1gen",
-        "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\evee.png",
-        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\evee_black.png",
-        "frances": "Goupix",
-        "italiano": "Vulpix",
-        "aleman": "Vulpix",
-        "ingles": "Vulpix"
+        "imagen_normal": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\eevee.png",
+        "silueta": "Packaje_PARCIAL2\\Imagenes_pokemones\\1gen\\eevee_black.png",
+        "frances": "Evoli",
+        "italiano": "Eevee",
+        "aleman": "Evoli",
+        "ingles": "Eevee"
     },
     "celebi": {
         "generacion": "2gen",

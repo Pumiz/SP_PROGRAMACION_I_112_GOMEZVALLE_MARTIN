@@ -73,11 +73,16 @@ texto_dificil, boton_dificil, texto_rect_dificil = crear_texto_en_caja("Dificil"
 
 
 #----------------Tabla de puntos----------------------
+contador = 0
+incrementar_rachas = lambda contador: contador + 1
+racha_csv, nueva_racha = mejorar_racha("Packaje_PARCIAL2\mejor_racha.csv", 0)
+
 titulo_tabla_puntos, rect_titulo_tabla_puntos = crear_texto_rect("Racha", fuente_gen, NEGRO)
 cuadro_racha = crear_rectangulo_objeto(posicion_caja_puntaje_x, posicion_caja_puntaje_y, ancho_caja_puntaje, alto_caja_puntaje, True, "midtop", rect_titulo_tabla_puntos)
 
-titulo_puntos, cuadro_racha_actual, rect_titulo_puntos = crear_texto_en_caja("Actual: ", fuente_gen, NEGRO, ancho_caja_racha_actual, alto_caja_racha_actual,cuadro_racha, "center", "midleft")
-titulo_mejor_racha, cuadro_mejor_racha, rect_titulo_mejor_racha = crear_texto_en_caja("Mejor: ", fuente_gen, NEGRO, ancho_caja_racha_actual, alto_caja_racha_actual,cuadro_racha, "midbottom", "midleft")
+titulo_puntos, cuadro_racha_actual, rect_titulo_puntos = crear_texto_en_caja("Actual: " + str(contador), fuente_gen, NEGRO, ancho_caja_racha_actual, alto_caja_racha_actual,cuadro_racha, "center", "midleft")
+titulo_mejor_racha, cuadro_mejor_racha, rect_titulo_mejor_racha = crear_texto_en_caja("Mejor:  " + str(racha_csv), fuente_gen, NEGRO, ancho_caja_racha_actual, alto_caja_racha_actual,cuadro_racha, "midbottom", "midleft")
+
 
 #titulo_mejor_tiempo = fuente.render("Mejor Tiempo: ", True, NEGRO)
 #titulo_promedio_tiempo = fuente.render("Promedio Tiempo: ", True, NEGRO)
@@ -94,29 +99,7 @@ eneable_gen_1 = True
 eneable_gen_2 = False
 eneable_gen_3 = False
 
-def pantalla_inicial():
-    #Se puede hacer con una matriz para no recibir todo por parametro
-    ventana.blit(imagen_titulo, ((ANCHO_VENTANA - 400) /2, 20))  # IMAGEN TITULO
-    
-    texto_rect = texto.get_rect()
-    texto_rect.center = cuadro_de_texto.center
-    ventana.blit(texto, texto_rect)  # texto del cuadro de texto
 
-    #ventana.blit(titulo, titulo_rect)  # titulo
-    ventana.blit(texto_no_lo_se, boton_rect) # no lo conozco
-
-    ventana.blit(texto_gen, texto_rect_gen)  # titulo generaciones
-    ventana.blit(texto_boton_gen_1, texto_rect_gen_1)
-    ventana.blit(texto_boton_gen_2, texto_rect_gen_2)
-    ventana.blit(texto_boton_gen_3, texto_rect_gen_3)
-
-    ventana.blit(texto_dificultad, texto_rect_dificultad)  # titulo dificultad
-    ventana.blit(texto_facil, texto_rect_facil) #boton facil
-    ventana.blit(texto_dificil, texto_rect_dificil) #boton dificil
-
-    ventana.blit(titulo_tabla_puntos, rect_titulo_tabla_puntos) #Titulo tabla puntos
-    ventana.blit(titulo_puntos, rect_titulo_puntos) #Titulo racha actual
-    ventana.blit(titulo_mejor_racha, rect_titulo_mejor_racha) #Titulo mejor racha
 
 clock = pygame.time.Clock()
 contador_interaciones = 0
@@ -130,6 +113,21 @@ while flag == True:
     no_lo_se = False
     coincidencia = False
 
+    matriz_bliteos = [
+        [imagen_titulo, ((ANCHO_VENTANA - 400) / 2, 20)],
+        [texto_no_lo_se, boton_rect],
+        [texto_gen, texto_rect_gen],
+        [texto_boton_gen_1, texto_rect_gen_1],
+        [texto_boton_gen_2, texto_rect_gen_2],
+        [texto_boton_gen_3, texto_rect_gen_3],
+        [texto_dificultad, texto_rect_dificultad],
+        [texto_facil, texto_rect_facil],
+        [texto_dificil, texto_rect_dificil],
+        [titulo_tabla_puntos, rect_titulo_tabla_puntos],
+        [titulo_puntos, rect_titulo_puntos],
+        [titulo_mejor_racha, rect_titulo_mejor_racha],
+    ]
+
     lista_eventos = pygame.event.get()      
     for evento in lista_eventos:
         if evento.type == pygame.QUIT:      
@@ -140,31 +138,46 @@ while flag == True:
                 texto_ingresado = texto_ingresado[:-1]
 
             elif evento.key == pygame.K_RETURN:
-                # Verificar si el nombre ingresado coincide con el nombre del Pokémon
                 if texto_ingresado.lower() == atributos_pokemon[0].lower():
+                    contador = incrementar_rachas(contador)
                     print("coincidencia")
-                    COLOR_CUADRO_TEXTO = VERDE
+                    mejor_racha, racha = mejorar_racha("Packaje_PARCIAL2\mejor_racha.csv", contador)
+                    # Actualizar el texto del contador actual
+                    titulo_puntos, cuadro_racha_actual, rect_titulo_puntos = crear_texto_en_caja("Actual: " + str(contador), fuente_gen, NEGRO, ancho_caja_racha_actual, alto_caja_racha_actual, cuadro_racha, "center", "midleft")
+                    titulo_mejor_racha, cuadro_mejor_racha, rect_titulo_mejor_racha = crear_texto_en_caja("Mejor:  " + str(racha), fuente_gen, NEGRO, ancho_caja_racha_actual, alto_caja_racha_actual,cuadro_racha, "midbottom", "midleft")
+                    
+                    #COLOR_CUADRO_TEXTO = VERDE
                     coincidencia = True
                     ventana.blit(atributos_pokemon[2], (posicion_cuadro_imagen_x, posicion_cuadro_imagen_y))
                     idiomas_pokemon(ventana, fuente_idiomas, NEGRO, BLANCO, posicion_caja_idiomas_x, posicion_caja_idiomas_y, ancho_caja_idiomas, alto_caja_idiomas, atributos_pokemon[4], atributos_pokemon[5], atributos_pokemon[6])
                     pygame.display.update()
                     pygame.time.wait(2000)
-                    COLOR_CUADRO_TEXTO = BLANCO
-                    contador_interaciones += 1 
                     atributos_pokemon = cargar_nuevo_pokemon(pokemones, eneable_gen_1, eneable_gen_2, eneable_gen_3, ancho_cuadro_imagen, alto_cuadro_imagen)
-                    texto_ingresado = ""
-                    
 
-                else:
                     texto_ingresado = ""
+                else:
                     print("No coincide")
-                    COLOR_CUADRO_TEXTO = ROJO
+                    texto_ingresado = ""
+                    #COLOR_CUADRO_TEXTO = ROJO
                     pygame.display.update()
             else:
                 texto_ingresado += evento.unicode
 
+
         elif evento.type == pygame.MOUSEBUTTONDOWN:
-                if evento.button == 1:  #boton izq 
+                if evento.button == 1:  # Boton izq 
+                    # Boton dificultad facil por defecto activo
+                    if boton_facil.collidepoint(evento.pos):
+                        COLOR_FACIL = VERDE
+                        COLOR_DIFICIL = ROJO
+                        facil = True
+
+                    # Boton dificultad facil por defecto desactivado
+                    elif boton_dificil.collidepoint(evento.pos):
+                        COLOR_FACIL = ROJO
+                        COLOR_DIFICIL = VERDE
+                        facil = False
+
                     # Boton selecionar generacion 1 por defecto activo
                     if boton_gen_1.collidepoint(evento.pos) and eneable_gen_1:
                         COLOR_BOTON_GEN_1 = ROJO
@@ -199,11 +212,14 @@ while flag == True:
                     # Boton "Mostrar imagen oculta"
                     if cuadro_boton.collidepoint(evento.pos):
                         print("no lo se")
+                        contador = 0
                         contador_interaciones += 1
                         COLOR_BOTON = BLANCO
                         no_lo_se = True
                         ventana.blit(atributos_pokemon[2], (posicion_cuadro_imagen_x, posicion_cuadro_imagen_y))
                         idiomas_pokemon(ventana, fuente_idiomas, NEGRO, BLANCO, posicion_caja_idiomas_x, posicion_caja_idiomas_y, ancho_caja_idiomas, alto_caja_idiomas, atributos_pokemon[4], atributos_pokemon[5], atributos_pokemon[6])
+                        titulo_puntos, cuadro_racha_actual, rect_titulo_puntos = crear_texto_en_caja("Actual: " + str(contador), fuente_gen, NEGRO, ancho_caja_racha_actual, alto_caja_racha_actual, cuadro_racha, "center", "midleft")
+                        
                         #Muestra el nombre del pokemon desconocido
                         texto = fuente_cuadro_texto.render(atributos_pokemon[0], True, NEGRO)
                         texto_rect = texto.get_rect()
@@ -228,28 +244,28 @@ while flag == True:
     
     ventana.fill(COLOR_FONDO)
 
-    pygame.draw.rect(ventana, COLOR_CUADRO_TEXTO, cuadro_de_texto, border_radius=12)  # relleno del cuadro texto
-    #pygame.draw.rect(ventana, BLANCO, cuadro_mejor_racha, border_radius=12)  # relleno de la table de puntos
-    pygame.draw.rect(ventana, BLANCO, cuadro_racha, border_radius=12)  # relleno de la table de puntos
-    pygame.draw.rect(ventana, BLANCO, cuadro_racha_actual, border_radius=8)  # relleno de la table de puntos
-    pygame.draw.rect(ventana, BLANCO, cuadro_mejor_racha, border_radius=8)  # relleno de la table de puntos
+    matriz_draws = [
+        [COLOR_CUADRO_TEXTO, cuadro_de_texto, 12],
+        [BLANCO, cuadro_racha, 12],
+        [BLANCO, cuadro_racha_actual, 8],
+        [BLANCO, cuadro_mejor_racha, 8],
+        [COLOR_CUADRO_IMAGEN, cuadro_de_imagen, 8],
+        [COLOR_BOTON, cuadro_boton, 8],
+        [BLANCO, cuadro_selec_gen, 8],
+        [COLOR_BOTON_GEN_1, boton_gen_1, 8],
+        [COLOR_BOTON_GEN_2, boton_gen_2, 8],
+        [COLOR_BOTON_GEN_3, boton_gen_3, 8],
+        [BLANCO, cuadro_selec_dificultad, 8],
+        [COLOR_FACIL, boton_facil, 8],
+        [COLOR_DIFICIL, boton_dificil, 8]
+    ]
 
-    pygame.draw.rect(ventana, COLOR_CUADRO_IMAGEN, cuadro_de_imagen)    # relleno del cuadro de imagen principal
-
-    pygame.draw.rect(ventana, COLOR_BOTON, cuadro_boton, border_radius=8)    # relleno del boton
-
-    pygame.draw.rect(ventana, BLANCO, cuadro_selec_gen, border_radius=8)    # relleno caja seleccion de generaciones
-    pygame.draw.rect(ventana, COLOR_BOTON_GEN_1, boton_gen_1, border_radius=8)    # relleno del boton
-    pygame.draw.rect(ventana, COLOR_BOTON_GEN_2, boton_gen_2, border_radius=8)    # relleno del boton
-    pygame.draw.rect(ventana, COLOR_BOTON_GEN_3, boton_gen_3, border_radius=8)    # relleno del boton
-
-    pygame.draw.rect(ventana, BLANCO, cuadro_selec_dificultad, border_radius=8)    # relleno caja seleccion de generaciones
-    pygame.draw.rect(ventana, COLOR_FACIL, boton_facil, border_radius=8)    # relleno del boton
-    pygame.draw.rect(ventana, COLOR_DIFICIL, boton_dificil, border_radius=8)    # relleno del boton
+    dibujar_rectangulos(ventana, matriz_draws)
 
     texto = fuente_cuadro_texto.render(texto_ingresado, True, NEGRO)
     ventana.blit(atributos_pokemon[1], (posicion_cuadro_imagen_x, posicion_cuadro_imagen_y))
-    pantalla_inicial()
+    blitear_objetos(ventana, matriz_bliteos, texto, cuadro_de_texto)
+
 
     pygame.display.update()
 

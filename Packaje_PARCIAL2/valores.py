@@ -16,8 +16,8 @@ COLOR_BOTON_GEN_1 = VERDE
 COLOR_BOTON_GEN_2 = ROJO
 COLOR_BOTON_GEN_3 = ROJO
 COLOR_CUADRO_IMAGEN = AZUL_CLARO    
-COLOR_FACIL = ROJO
-COLOR_DIFICIL = VERDE
+COLOR_FACIL = VERDE
+COLOR_DIFICIL = ROJO
 #------------------------VENTANA-------------------------
 ANCHO_VENTANA = 1300
 ALTO_VENTANA = 750
@@ -64,7 +64,7 @@ ancho_caja_puntaje = 220
 alto_caja_puntaje = 160
 
 posicion_caja_puntaje_x = ANCHO_VENTANA - ancho_caja_puntaje - 40
-posicion_caja_puntaje_y = 200
+posicion_caja_puntaje_y = 100
 
 ancho_caja_racha_actual = 180
 alto_caja_racha_actual = 50
@@ -96,3 +96,18 @@ alto_boton_dificultad = 30
 
 posicion_dificultad_x = 40
 posicion_dificultad_y = 350
+
+#------------------------Atributos cajas tiempo-------------------------
+#---------Actual-------
+ancho_caja_tiempos = 220
+alto_caja_tiempos = 50
+
+posicion_tiempos_x = ANCHO_VENTANA - (ancho_caja_tiempos + 40)
+posicion_tiempos_y = 300
+
+#---------Tabla-------
+ancho_tabla_tiempos = 220
+alto_tabla_tiempos = 130
+
+posicion_caja_tiempos_x = ANCHO_VENTANA - (ancho_tabla_tiempos + 40)
+posicion_caja_tiempos_y = 380

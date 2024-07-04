@@ -123,7 +123,7 @@ def centrar_objeto(posicion, objeto_a_centar, rectangulo_objeto):
             pass
 
 
-def crear_texto_en_caja(texto, fuente_texto, color_texto, ancho_caja, alto_caja,cuadro_principal, posicion_caja, posicion_texto):
+def crear_texto_en_caja(texto, fuente_texto, color_texto, ancho_caja, alto_caja, cuadro_principal, posicion_caja, posicion_texto):
     texto, texto_rect = crear_texto_rect(texto, fuente_texto, color_texto)
 
     caja = crear_rectangulo_objeto(0, 0, ancho_caja, alto_caja, False, None ,None)
@@ -173,4 +173,4 @@ def blitear_objetos(ventana, matriz_objetos, texto, cuadro_texto):
 
 def dibujar_rectangulos(ventana, matriz_draw):
     for color, rect, border_radius in matriz_draw:
-        pygame.draw.rect(ventana, color, rect, border_radius=border_radius)
+        pygame.draw.rect(ventana, color, rect, border_radius = border_radius)

@@ -3,11 +3,12 @@ import sys
 import json
 from valores import *
 from funciones import *
+import time
 pygame.init()
 
 pokemones = []
 
-with open(r"SP_PROGRAMACION_I_112_GRUPO_6_GOMEZVALLE_MARTIN_CRISTIAN_PENTITO\Packaje_PARCIAL2\Imagenes_pokemones.json", "r") as archivo:
+with open("Packaje_PARCIAL2\Imagenes_pokemones.json", "r") as archivo:
 #with open("Packaje_PARCIAL2\\Imagenes_pokemones.json", "r") as archivo:
     json_pokemones = json.load(archivo)
     pokemones = cargar_pokemones_en_lista(pokemones, json_pokemones)
@@ -19,20 +20,20 @@ ventana = pygame.display.set_mode(TAMAÑO_VENTANA)
 pygame.display.set_caption("¿Quien es ese Pokémon?") 
 
 #------------------------Icono------------------------
-icono = pygame.image.load(r"SP_PROGRAMACION_I_112_GRUPO_6_GOMEZVALLE_MARTIN_CRISTIAN_PENTITO\Packaje_PARCIAL2\pikachu.png")
+icono = pygame.image.load("Packaje_PARCIAL2\pikachu.png")
 pygame.display.set_icon(icono)
 
 #------------------------Fuentes texto----------------------
 fuente = pygame.font.SysFont("Consolas", 40)
 fuente_cuadro_texto = pygame.font.SysFont("Arial", 20)
 fuente_boton = pygame.font.SysFont("Consolas", 15)
-fuente_gen = pygame.font.SysFont("Consolas", 30)
-fuente_boton_gen = pygame.font.SysFont("Consolas", 40)
+fuente_gen = pygame.font.SysFont("Consolas", 25)
+fuente_mejores_tiempo = pygame.font.SysFont("Consolas", 20)
 fuente_idiomas = pygame.font.SysFont("Arial", 18)
 
 
 #------------------------Foto Titulo------------------------
-imagen_titulo = pygame.image.load(r"SP_PROGRAMACION_I_112_GRUPO_6_GOMEZVALLE_MARTIN_CRISTIAN_PENTITO\Packaje_PARCIAL2\Imagenes_pokemones\quien.png")
+imagen_titulo = pygame.image.load("Packaje_PARCIAL2\Imagenes_pokemones\quien.png")
 imagen_titulo = pygame.transform.scale(imagen_titulo, (400,180))
 #titulo = fuente.render("¿Quién es ese Pokémon?", True, NEGRO)
 #titulo_rect = titulo.get_rect()
@@ -40,7 +41,7 @@ imagen_titulo = pygame.transform.scale(imagen_titulo, (400,180))
 
 
 #----------------Imagen de Fondo----------------------
-fondo_ventana = pygame.image.load(r"SP_PROGRAMACION_I_112_GRUPO_6_GOMEZVALLE_MARTIN_CRISTIAN_PENTITO\Packaje_PARCIAL2\imagenes_fondo\fondo pokemon.jpg")
+fondo_ventana = pygame.image.load(r"Packaje_PARCIAL2\imagenes_fondo\fondo pokemon.jpg")
 # imagen = pygame.transform.scale(imagen, (1000,800))
 
 #----------------Rectangulo de Imagen-------------------
@@ -76,7 +77,7 @@ texto_dificil, boton_dificil, texto_rect_dificil = crear_texto_en_caja("Dificil"
 #----------------Tabla de puntos----------------------
 contador = 0
 incrementar_rachas = lambda contador: contador + 1
-racha_csv, nueva_racha = mejorar_racha(r"SP_PROGRAMACION_I_112_GRUPO_6_GOMEZVALLE_MARTIN_CRISTIAN_PENTITO\Packaje_PARCIAL2\mejor_racha.csv", 0)
+racha_csv, nueva_racha = mejorar_racha("Packaje_PARCIAL2\mejor_racha.csv", 0)
 
 titulo_tabla_puntos, rect_titulo_tabla_puntos = crear_texto_rect("Racha", fuente_gen, NEGRO)
 cuadro_racha = crear_rectangulo_objeto(posicion_caja_puntaje_x, posicion_caja_puntaje_y, ancho_caja_puntaje, alto_caja_puntaje, True, "midtop", rect_titulo_tabla_puntos)
@@ -85,11 +86,20 @@ titulo_puntos, cuadro_racha_actual, rect_titulo_puntos = crear_texto_en_caja("Ac
 titulo_mejor_racha, cuadro_mejor_racha, rect_titulo_mejor_racha = crear_texto_en_caja("Mejor:  " + str(racha_csv), fuente_gen, NEGRO, ancho_caja_racha_actual, alto_caja_racha_actual,cuadro_racha, "midbottom", "midleft")
 
 
-#titulo_mejor_tiempo = fuente.render("Mejor Tiempo: ", True, NEGRO)
-#titulo_promedio_tiempo = fuente.render("Promedio Tiempo: ", True, NEGRO)
+#----------------Tabla de tiempos----------------------
+titulo_tabla_tiempo, rect_titulo_tabla_timepo = crear_texto_rect(" Tiempo: ", fuente_gen, NEGRO)
+cuadro_tiempo = crear_rectangulo_objeto(posicion_tiempos_x, posicion_tiempos_y, ancho_caja_tiempos, alto_caja_tiempos, True, "midleft", rect_titulo_tabla_timepo)
+
+
+titulo_tabla_mejor_tiempo, rect_titulo_tabla_mejor_tiempo = crear_texto_rect(" Mejor tiempo: ", fuente_mejores_tiempo, NEGRO)
+tabla_tiempo = crear_rectangulo_objeto(posicion_caja_tiempos_x, posicion_caja_tiempos_y, ancho_tabla_tiempos, alto_tabla_tiempos, True, "topleft", rect_titulo_tabla_mejor_tiempo)
+
+titulo_tiempo_anterior, cuadro_tiempo_anterior, rect_tiempo_anterior = crear_texto_en_caja(" Tiempo anterior: ", fuente_mejores_tiempo, NEGRO, ancho_caja_racha_actual, alto_caja_racha_actual,tabla_tiempo, "midleft", "midleft")
+titulo_tiempo_promedio, cuadro_tiempo_promedio, rect_titulo_tiempo_promedio = crear_texto_en_caja(" Promedio tiempo: ", fuente_mejores_tiempo, NEGRO, ancho_caja_racha_actual, alto_caja_racha_actual,tabla_tiempo, "bottomleft", "midleft")
+
 
 #----------------Carga de Pokemones----------------
-path = r"SP_PROGRAMACION_I_112_GRUPO_6_GOMEZVALLE_MARTIN_CRISTIAN_PENTITO\Packaje_PARCIAL2\Imagenes_pokemones.json"
+path = "Packaje_PARCIAL2\Imagenes_pokemones.json"
 with open(path, "r") as archivo:
     json_pokemones = json.load(archivo)
 
@@ -102,18 +112,51 @@ eneable_gen_3 = False
 
 
 
+
+
+
 clock = pygame.time.Clock()
 contador_interaciones = 0
 
 atributos_pokemon = cargar_nuevo_pokemon(pokemones, eneable_gen_1, eneable_gen_2, eneable_gen_3, ancho_cuadro_imagen, alto_cuadro_imagen)
 
+desblitear_pantalla = True
+
+def juego_terminado():
+    #----------------Tabla de tiempos----------------------
+    ancho_caja_tiempos = 400
+    alto_caja_tiempos = 400
+    posicion_tiempos_x = (ANCHO_VENTANA - ancho_caja_tiempos) / 2
+    posicion_tiempos_y = ((ALTO_VENTANA - alto_caja_tiempos) / 2) + 30
+
+    
+
+    titulo_tabla_tiempo, rect_tabla_final = crear_texto_rect(" Tiempos: ", fuente_gen, NEGRO)
+    cuadro_tiempo = crear_rectangulo_objeto(posicion_tiempos_x, posicion_tiempos_y, ancho_caja_tiempos, alto_caja_tiempos, True, "midtop", rect_tabla_final)
+    
+    texto_jugar_de_nuevo, boton_rect_jugar = crear_texto_rect("Jugar de Nuevo", fuente_boton, NEGRO)
+    cuadro_jugar = crear_rectangulo_objeto(posicion_boton_x, posicion_cuadro_de_texto_y, ancho_boton, alto_boton, True, "center", boton_rect_jugar)
+
+
+
+    ventana.blit(imagen_titulo, ((ANCHO_VENTANA - 400) / 2, 20)) #imagen titulo
+    ventana.blit(titulo_tabla_tiempo, rect_tabla_final)
+    ventana.blit(texto_jugar_de_nuevo, boton_rect_jugar)
+    #ventana.blit(titulo_tabla_mejor_tiempo, rect_titulo_tabla_mejor_tiempo)
+
+    
+    pygame.draw.rect(ventana, BLANCO, cuadro_tiempo, border_radius = 12)
+    pygame.draw.rect(ventana, BLANCO, cuadro_jugar, border_radius = 8)
+
+    pygame.display.update()
+
+    return cuadro_jugar
+
 
 flag = True
 while flag == True:
-    clock.tick(FPS)         
-    no_lo_se = False
+    clock.tick(FPS)
     coincidencia = False
-
     matriz_bliteos = [
         [imagen_titulo, ((ANCHO_VENTANA - 400) / 2, 20)],
         [texto_no_lo_se, boton_rect],
@@ -127,22 +170,33 @@ while flag == True:
         [titulo_tabla_puntos, rect_titulo_tabla_puntos],
         [titulo_puntos, rect_titulo_puntos],
         [titulo_mejor_racha, rect_titulo_mejor_racha],
+        [titulo_tabla_tiempo, rect_titulo_tabla_timepo],
+        [titulo_tabla_mejor_tiempo, rect_titulo_tabla_mejor_tiempo],
+        [titulo_tiempo_anterior, rect_tiempo_anterior],
+        [titulo_tiempo_promedio, rect_titulo_tiempo_promedio],
     ]
-    
+
+    if contador >= 2:
+        desblitear_pantalla = False
+        cuadro_jugar = juego_terminado()
+
     lista_eventos = pygame.event.get()      
     for evento in lista_eventos:
         if evento.type == pygame.QUIT:      
             flag = False
 
         elif evento.type == pygame.KEYDOWN:
+
             if evento.key == pygame.K_BACKSPACE:
                 texto_ingresado = texto_ingresado[:-1]
 
             elif evento.key == pygame.K_RETURN:
+            
                 if texto_ingresado.lower() == atributos_pokemon[0].lower():
                     contador = incrementar_rachas(contador)
                     print("coincidencia")
-                    mejor_racha, racha = mejorar_racha(r"SP_PROGRAMACION_I_112_GRUPO_6_GOMEZVALLE_MARTIN_CRISTIAN_PENTITO\Packaje_PARCIAL2\mejor_racha.csv", contador)
+                    print(contador)
+                    mejor_racha, racha = mejorar_racha("Packaje_PARCIAL2\mejor_racha.csv", contador)
                     # Actualizar el texto del contador actual
                     titulo_puntos, cuadro_racha_actual, rect_titulo_puntos = crear_texto_en_caja("Actual: " + str(contador), fuente_gen, NEGRO, ancho_caja_racha_actual, alto_caja_racha_actual, cuadro_racha, "center", "midleft")
                     titulo_mejor_racha, cuadro_mejor_racha, rect_titulo_mejor_racha = crear_texto_en_caja("Mejor:  " + str(racha), fuente_gen, NEGRO, ancho_caja_racha_actual, alto_caja_racha_actual,cuadro_racha, "midbottom", "midleft")
@@ -154,8 +208,9 @@ while flag == True:
                     pygame.display.update()
                     pygame.time.wait(2000)
                     atributos_pokemon = cargar_nuevo_pokemon(pokemones, eneable_gen_1, eneable_gen_2, eneable_gen_3, ancho_cuadro_imagen, alto_cuadro_imagen)
-
                     texto_ingresado = ""
+
+
                 else:
                     print("No coincide")
                     texto_ingresado = ""
@@ -166,7 +221,12 @@ while flag == True:
 
 
         elif evento.type == pygame.MOUSEBUTTONDOWN:
+
                 if evento.button == 1:  # Boton izq 
+                    if desblitear_pantalla == False:
+                        if cuadro_jugar.collidepoint(evento.pos):
+                            desblitear_pantalla = True
+                            contador = 0
                     # Boton dificultad facil por defecto activo
                     if boton_facil.collidepoint(evento.pos):
                         COLOR_FACIL = VERDE
@@ -214,9 +274,7 @@ while flag == True:
                     if cuadro_boton.collidepoint(evento.pos):
                         print("no lo se")
                         contador = 0
-                        contador_interaciones += 1
                         COLOR_BOTON = BLANCO
-                        no_lo_se = True
                         ventana.blit(atributos_pokemon[2], (posicion_cuadro_imagen_x, posicion_cuadro_imagen_y))
                         idiomas_pokemon(ventana, fuente_idiomas, NEGRO, BLANCO, posicion_caja_idiomas_x, posicion_caja_idiomas_y, ancho_caja_idiomas, alto_caja_idiomas, atributos_pokemon[4], atributos_pokemon[5], atributos_pokemon[6])
                         titulo_puntos, cuadro_racha_actual, rect_titulo_puntos = crear_texto_en_caja("Actual: " + str(contador), fuente_gen, NEGRO, ancho_caja_racha_actual, alto_caja_racha_actual, cuadro_racha, "center", "midleft")
@@ -231,13 +289,9 @@ while flag == True:
                         pygame.time.wait(2000)
 
                         atributos_pokemon = cargar_nuevo_pokemon(pokemones, eneable_gen_1, eneable_gen_2, eneable_gen_3, ancho_cuadro_imagen, alto_cuadro_imagen)
-    
-                    else:
-                        COLOR_BOTON = GRIS_CLARO
-        while contador_interaciones == 10:
-            #terminaria la partida
-            #printear todos los resultados
-            pass
+                    
+
+
 
 
 
@@ -260,17 +314,23 @@ while flag == True:
         [COLOR_BOTON_GEN_3, boton_gen_3, 8],
         [BLANCO, cuadro_selec_dificultad, 8],
         [COLOR_FACIL, boton_facil, 8],
-        [COLOR_DIFICIL, boton_dificil, 8]
+        [COLOR_DIFICIL, boton_dificil, 8],
+        [BLANCO, cuadro_tiempo, 12],
+        [BLANCO, tabla_tiempo, 12],
+        [BLANCO, cuadro_tiempo_anterior, 8],
+        [BLANCO, cuadro_tiempo_promedio, 8],
     ]
 
-    dibujar_rectangulos(ventana, matriz_draws)
+    if desblitear_pantalla:
+        dibujar_rectangulos(ventana, matriz_draws)
 
-    texto = fuente_cuadro_texto.render(texto_ingresado, True, NEGRO)
-    ventana.blit(atributos_pokemon[1], (posicion_cuadro_imagen_x, posicion_cuadro_imagen_y))
-    blitear_objetos(ventana, matriz_bliteos, texto, cuadro_de_texto)
+        texto = fuente_cuadro_texto.render(texto_ingresado, True, NEGRO)
+        ventana.blit(atributos_pokemon[1], (posicion_cuadro_imagen_x, posicion_cuadro_imagen_y))
+
+        blitear_objetos(ventana, matriz_bliteos, texto, cuadro_de_texto)
 
 
-    pygame.display.update()
+        pygame.display.update()
 
 pygame.quit()
 sys.exit()

@@ -85,6 +85,7 @@ posicion_caja_idiomas_y = 700
 
 posicion_boton_x = (ANCHO_VENTANA - ancho_boton) // 2
 
+lista_posiciones_boton = [posicion_boton_x, posicion_cuadro_de_texto_y, ancho_boton, alto_boton]
 lista_de_imagenes = []
 
 #------------------------Atributos cajas dificultad-------------------------

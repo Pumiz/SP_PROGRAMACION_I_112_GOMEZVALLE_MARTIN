@@ -9,7 +9,6 @@ pygame.init()
 pokemones = []
 
 with open("Packaje_PARCIAL2\Imagenes_pokemones.json", "r") as archivo:
-#with open("Packaje_PARCIAL2\\Imagenes_pokemones.json", "r") as archivo:
     json_pokemones = json.load(archivo)
     pokemones = cargar_pokemones_en_lista(pokemones, json_pokemones)
 
@@ -90,7 +89,6 @@ titulo_mejor_racha, cuadro_mejor_racha, rect_titulo_mejor_racha = crear_texto_en
 titulo_tabla_tiempo, rect_titulo_tabla_timepo = crear_texto_rect(" Tiempo: ", fuente_gen, NEGRO)
 cuadro_tiempo = crear_rectangulo_objeto(posicion_tiempos_x, posicion_tiempos_y, ancho_caja_tiempos, alto_caja_tiempos, True, "midleft", rect_titulo_tabla_timepo)
 
-
 titulo_tabla_mejor_tiempo, rect_titulo_tabla_mejor_tiempo = crear_texto_rect(" Mejor tiempo: ", fuente_mejores_tiempo, NEGRO)
 tabla_tiempo = crear_rectangulo_objeto(posicion_caja_tiempos_x, posicion_caja_tiempos_y, ancho_tabla_tiempos, alto_tabla_tiempos, True, "topleft", rect_titulo_tabla_mejor_tiempo)
 
@@ -110,48 +108,12 @@ eneable_gen_1 = True
 eneable_gen_2 = False
 eneable_gen_3 = False
 
-
-
-
-
-
 clock = pygame.time.Clock()
 contador_interaciones = 0
 
-atributos_pokemon = cargar_nuevo_pokemon(pokemones, eneable_gen_1, eneable_gen_2, eneable_gen_3, ancho_cuadro_imagen, alto_cuadro_imagen)
-
+facil = True
 desblitear_pantalla = True
-
-def juego_terminado():
-    #----------------Tabla de tiempos----------------------
-    ancho_caja_tiempos = 400
-    alto_caja_tiempos = 400
-    posicion_tiempos_x = (ANCHO_VENTANA - ancho_caja_tiempos) / 2
-    posicion_tiempos_y = ((ALTO_VENTANA - alto_caja_tiempos) / 2) + 30
-
-    
-
-    titulo_tabla_tiempo, rect_tabla_final = crear_texto_rect(" Tiempos: ", fuente_gen, NEGRO)
-    cuadro_tiempo = crear_rectangulo_objeto(posicion_tiempos_x, posicion_tiempos_y, ancho_caja_tiempos, alto_caja_tiempos, True, "midtop", rect_tabla_final)
-    
-    texto_jugar_de_nuevo, boton_rect_jugar = crear_texto_rect("Jugar de Nuevo", fuente_boton, NEGRO)
-    cuadro_jugar = crear_rectangulo_objeto(posicion_boton_x, posicion_cuadro_de_texto_y, ancho_boton, alto_boton, True, "center", boton_rect_jugar)
-
-
-
-    ventana.blit(imagen_titulo, ((ANCHO_VENTANA - 400) / 2, 20)) #imagen titulo
-    ventana.blit(titulo_tabla_tiempo, rect_tabla_final)
-    ventana.blit(texto_jugar_de_nuevo, boton_rect_jugar)
-    #ventana.blit(titulo_tabla_mejor_tiempo, rect_titulo_tabla_mejor_tiempo)
-
-    
-    pygame.draw.rect(ventana, BLANCO, cuadro_tiempo, border_radius = 12)
-    pygame.draw.rect(ventana, BLANCO, cuadro_jugar, border_radius = 8)
-
-    pygame.display.update()
-
-    return cuadro_jugar
-
+atributos_pokemon = cargar_nuevo_pokemon(pokemones, eneable_gen_1, eneable_gen_2, eneable_gen_3, ancho_cuadro_imagen, alto_cuadro_imagen, facil)
 
 flag = True
 while flag == True:
@@ -176,9 +138,10 @@ while flag == True:
         [titulo_tiempo_promedio, rect_titulo_tiempo_promedio],
     ]
 
-    if contador >= 2:
+    if contador == 10:
         desblitear_pantalla = False
-        cuadro_jugar = juego_terminado()
+        cuadro_jugar = juego_terminado(ventana, NEGRO, BLANCO, ANCHO_VENTANA, ALTO_VENTANA, fuente_boton, lista_posiciones_boton, imagen_titulo)
+        contador = 0
 
     lista_eventos = pygame.event.get()      
     for evento in lista_eventos:
@@ -207,7 +170,7 @@ while flag == True:
                     idiomas_pokemon(ventana, fuente_idiomas, NEGRO, BLANCO, posicion_caja_idiomas_x, posicion_caja_idiomas_y, ancho_caja_idiomas, alto_caja_idiomas, atributos_pokemon[4], atributos_pokemon[5], atributos_pokemon[6])
                     pygame.display.update()
                     pygame.time.wait(2000)
-                    atributos_pokemon = cargar_nuevo_pokemon(pokemones, eneable_gen_1, eneable_gen_2, eneable_gen_3, ancho_cuadro_imagen, alto_cuadro_imagen)
+                    atributos_pokemon = cargar_nuevo_pokemon(pokemones, eneable_gen_1, eneable_gen_2, eneable_gen_3, ancho_cuadro_imagen, alto_cuadro_imagen, facil)
                     texto_ingresado = ""
 
 
@@ -288,14 +251,8 @@ while flag == True:
                         pygame.display.update()
                         pygame.time.wait(2000)
 
-                        atributos_pokemon = cargar_nuevo_pokemon(pokemones, eneable_gen_1, eneable_gen_2, eneable_gen_3, ancho_cuadro_imagen, alto_cuadro_imagen)
+                        atributos_pokemon = cargar_nuevo_pokemon(pokemones, eneable_gen_1, eneable_gen_2, eneable_gen_3, ancho_cuadro_imagen, alto_cuadro_imagen, facil)
                     
-
-
-
-
-
-
     
     #ventana.fill(COLOR_FONDO)
     ventana.blit(fondo_ventana, (0, 0))

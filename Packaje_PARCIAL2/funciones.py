@@ -175,9 +175,10 @@ def blitear_objetos(ventana, matriz_objetos, texto, cuadro_texto):
     for elemento in matriz_objetos:
         ventana.blit(elemento[0], elemento[1])
 
-def dibujar_rectangulos(ventana, matriz_draw):
+def dibujar_rectangulos(ventana, matriz_draw, color_borde_imagen, cuadro_imagen):
     for color, rect, border_radius in matriz_draw:
         pygame.draw.rect(ventana, color, rect, border_radius = border_radius)
+    pygame.draw.rect(ventana, color_borde_imagen, cuadro_imagen, 1)
 
 
 def juego_terminado(ventana, color_letras, color_fondo, ancho_ventana, alto_ventana,fuente, list_posicion_boton: list, imagen_titulo):

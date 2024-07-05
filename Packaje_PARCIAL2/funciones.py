@@ -30,7 +30,7 @@ def separar_por_gen(lista_pokemones):
     return lista_gen1, lista_gen2, lista_gen3
 
 
-def cargar_nuevo_pokemon(lista_pokemones: list, eneable_gen_1: bool, eneable_gen_2: bool, eneable_gen_3: bool, ancho_imagen: int, alto_imagen: int):
+def cargar_nuevo_pokemon(lista_pokemones: list, eneable_gen_1: bool, eneable_gen_2: bool, eneable_gen_3: bool, ancho_imagen: int, alto_imagen: int, is_facil: bool):
     lista_gen1, lista_gen2, lista_gen3 = separar_por_gen(lista_pokemones)
     dos_generaciones = False
 
@@ -66,8 +66,12 @@ def cargar_nuevo_pokemon(lista_pokemones: list, eneable_gen_1: bool, eneable_gen
     lista_atributos_pokemon = []
 
     pokemon_actual = random.choice(lista_pokemones)
+    if is_facil:
+        ruta_imagen_silueta = pokemon_actual['imagen_normal']
+    else:
+        ruta_imagen_silueta = pokemon_actual['silueta']
+    
     ruta_imagen_normal = pokemon_actual['imagen_normal']
-    ruta_imagen_silueta = pokemon_actual['silueta']
     nombre_pokemon = pokemon_actual['nombre']
     generacion_pokemon = pokemon_actual['generacion']
     nombre_frances = pokemon_actual['frances']
@@ -174,3 +178,27 @@ def blitear_objetos(ventana, matriz_objetos, texto, cuadro_texto):
 def dibujar_rectangulos(ventana, matriz_draw):
     for color, rect, border_radius in matriz_draw:
         pygame.draw.rect(ventana, color, rect, border_radius = border_radius)
+
+
+def juego_terminado(ventana, color_letras, color_fondo, ancho_ventana, alto_ventana,fuente, list_posicion_boton: list, imagen_titulo):
+    #----------------Tabla de tiempos----------------------
+    ancho_caja_tiempos = 400
+    alto_caja_tiempos = 400
+    posicion_tiempos_x = (ancho_ventana - ancho_caja_tiempos) / 2
+    posicion_tiempos_y = ((alto_ventana - alto_caja_tiempos) / 2) + 30
+
+    titulo_tabla_tiempo, rect_tabla_final = crear_texto_rect(" Tiempos: ", fuente, color_letras)
+    cuadro_tiempo = crear_rectangulo_objeto(posicion_tiempos_x, posicion_tiempos_y, ancho_caja_tiempos, alto_caja_tiempos, True, "midtop", rect_tabla_final)
+    
+    texto_jugar_de_nuevo, boton_rect_jugar = crear_texto_rect("Jugar de Nuevo", fuente, color_letras)
+    cuadro_jugar = crear_rectangulo_objeto(list_posicion_boton[0], list_posicion_boton[1], list_posicion_boton[2], list_posicion_boton[3], True, "center", boton_rect_jugar)
+
+    ventana.blit(imagen_titulo, ((ancho_ventana - 400) / 2, 20)) #imagen titulo
+    ventana.blit(titulo_tabla_tiempo, rect_tabla_final)
+    ventana.blit(texto_jugar_de_nuevo, boton_rect_jugar)
+
+    pygame.draw.rect(ventana, color_fondo, cuadro_tiempo, border_radius = 12)
+    pygame.draw.rect(ventana, color_fondo, cuadro_jugar, border_radius = 8)
+    pygame.display.update()
+
+    return cuadro_jugar

@@ -1,0 +1,17 @@
+# ¿Quién es ese Pokémon?
+![Markdown](/Packaje_PARCIAL2/imagenes_fondo/captura_juego1.png)
+![Markdown](/Packaje_PARCIAL2/imagenes_fondo/ccaptura_juego2.png)
+
+
+## Integrantes 
+- Cristian Pentito
+- Martin Gomez Valle
+
+## Descripción
+Proyecto final de Programacion I realizado con Pygame estilo "Quien es ese pokemon". Se aplicaron todos los conocimientos vistos en la cursada de este primer cuatrimestre como la modularizacion,
+reutilizacion de funciones, documentacion, matrices y muchos elementos tanto logicos como de reglas de estilo.
+
+## :snake: Link carpeta del proyecto
+- [Drive]()
+## :tv: Link al video del gameplay
+- [YouTube]()

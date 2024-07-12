@@ -12,6 +12,6 @@ Proyecto final de Programacion I realizado con Pygame estilo "Quien es ese pokem
 reutilizacion de funciones, documentacion, matrices y muchos elementos tanto logicos como de reglas de estilo.
 
 ## :snake: Link carpeta del proyecto
-- [Drive]()
+- [Drive](https://youtu.be/kg5pxI8ucnY)
 ## :tv: Link al video del gameplay
-- [YouTube]()
+- [YouTube](https://drive.google.com/drive/folders/1at-BUPWQlVW4Y8hfqJGm6mJzJZDfA4N_?usp=sharing)

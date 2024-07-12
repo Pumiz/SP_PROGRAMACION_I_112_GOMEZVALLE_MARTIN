@@ -7,6 +7,7 @@ from funciones import *
 pygame.init()
 
 pokemones = []
+lista_pokemones_jugados = []
 
 with open("Packaje_PARCIAL2\Imagenes_pokemones.json", "r") as archivo:
     json_pokemones = json.load(archivo)
@@ -21,7 +22,7 @@ icono = pygame.image.load("Packaje_PARCIAL2\pikachu.png")
 pygame.display.set_icon(icono)
 
 #------------------------Fuentes texto----------------------
-fuente = pygame.font.SysFont("Consolas", 40)
+fuente_resultados = pygame.font.SysFont("Consolas", 32)
 fuente_cuadro_texto = pygame.font.SysFont("Arial", 20)
 fuente_boton = pygame.font.SysFont("Consolas", 15)
 fuente_gen = pygame.font.SysFont("Consolas", 25)
@@ -65,7 +66,7 @@ incrementar_rachas = lambda contador: contador + 1
 racha_csv, nueva_racha = mejorar_racha("Packaje_PARCIAL2\mejor_racha.csv", 0)
 
 titulo_tabla_puntos, rect_titulo_tabla_puntos = crear_texto_rect(dicc_bliteos, "racha","Racha", fuente_gen, NEGRO)
-cuadro_racha = crear_rectangulo_objeto(dicc_dibujos, "cuadro_racha",posicion_caja_puntaje_x, posicion_caja_puntaje_y, ancho_caja_puntaje, alto_caja_puntaje, True, "midtop", rect_titulo_tabla_puntos, BLANCO, 12)
+cuadro_racha = crear_rectangulo_objeto(dicc_dibujos, "cuadro_racha", posicion_caja_puntaje_x, posicion_caja_puntaje_y, ancho_caja_puntaje, alto_caja_puntaje, True, "midtop", rect_titulo_tabla_puntos, BLANCO, 12)
 
 crear_texto_en_caja(dicc_bliteos, "actual",dicc_dibujos,"Actual: " + str(contador), fuente_gen, NEGRO, BLANCO,ancho_caja_racha_actual, alto_caja_racha_actual,cuadro_racha, "center", "midleft")
 crear_texto_en_caja(dicc_bliteos, "mejor",dicc_dibujos,"Mejor:  " + str(racha_csv), fuente_gen, NEGRO, BLANCO,ancho_caja_racha_actual, alto_caja_racha_actual,cuadro_racha, "midbottom", "midleft")
@@ -80,14 +81,6 @@ tabla_tiempo = crear_rectangulo_objeto(dicc_dibujos, "tabla_tiempo",posicion_caj
 crear_texto_en_caja(dicc_bliteos, "tiempo_anterior",dicc_dibujos," Tiempo anterior: ", fuente_mejores_tiempo, NEGRO, BLANCO, ancho_caja_racha_actual, alto_caja_racha_actual,tabla_tiempo, "midleft", "midleft")
 crear_texto_en_caja(dicc_bliteos, "tiempo_promedio",dicc_dibujos," Tiempo promedio: ", fuente_mejores_tiempo, NEGRO, BLANCO, ancho_caja_racha_actual, alto_caja_racha_actual,tabla_tiempo, "bottomleft", "midleft")
 
-#----------------Carga de Pokemones----------------
-path = "Packaje_PARCIAL2\Imagenes_pokemones.json"
-with open(path, "r") as archivo:
-    json_pokemones = json.load(archivo)
-
-pokemones = []
-pokemones = cargar_pokemones_en_lista(pokemones, json_pokemones)
-
 eneable_gen_1 = True
 eneable_gen_2 = False
 eneable_gen_3 = False
@@ -96,33 +89,22 @@ clock = pygame.time.Clock()
 contador_interaciones = 0
 
 facil = True
-blitear_pantalla = True
-atributos_pokemon = cargar_nuevo_pokemon(pokemones, eneable_gen_1, eneable_gen_2, eneable_gen_3, ancho_cuadro_imagen, alto_cuadro_imagen, facil)
-
 contador_segundos = 0
 contando = False
+bandera_juego_terminado = False
 tiempo_inicial = 0
 lista_tiempos = []
+dicc_atributos_pokemon = cargar_nuevo_pokemon(pokemones, lista_pokemones_jugados, eneable_gen_1, eneable_gen_2, eneable_gen_3, ancho_cuadro_imagen, alto_cuadro_imagen, facil)
 
 flag = True
 while flag == True:
     clock.tick(FPS)
-
+    
     lista_boton_gen_1 = crear_texto_en_caja(dicc_bliteos, "boton_gen_1", dicc_dibujos, "1", fuente_gen, NEGRO, COLOR_BOTON_GEN_1, ancho_boton_generaciones, alto_boton_generaciones, cuadro_selec_gen, "bottomleft", "center")
     lista_boton_gen_2 = crear_texto_en_caja(dicc_bliteos, "boton_gen_2", dicc_dibujos, "2", fuente_gen, NEGRO, COLOR_BOTON_GEN_2, ancho_boton_generaciones, alto_boton_generaciones, cuadro_selec_gen, "midbottom", "center")
     lista_boton_gen_3 = crear_texto_en_caja(dicc_bliteos, "boton_gen_3", dicc_dibujos, "3", fuente_gen, NEGRO, COLOR_BOTON_GEN_3, ancho_boton_generaciones, alto_boton_generaciones, cuadro_selec_gen, "bottomright", "center")
-
     lista_boton_facil = crear_texto_en_caja(dicc_bliteos, "facil",dicc_dibujos,"Facil", fuente_gen, NEGRO, COLOR_FACIL, ancho_boton_dificultad, alto_boton_dificultad, cuadro_selec_dificultad, "center", "center")
     lista_boton_dificil = crear_texto_en_caja(dicc_bliteos, "dificil",dicc_dibujos,"Dificil", fuente_gen, NEGRO, COLOR_DIFICIL, ancho_boton_dificultad, alto_boton_dificultad, cuadro_selec_dificultad, "midbottom", "center")
-
-    if contador == 3: #cambiar a 10
-        deblitear_todo(dicc_bliteos)
-        deblitear_todo(dicc_dibujos)
-        blitear_pantalla = False
-        contando = False
-        cuadro_jugar = juego_terminado(ventana, dicc_bliteos, dicc_dibujos,NEGRO, BLANCO, ANCHO_VENTANA, ALTO_VENTANA, fuente_boton, lista_posiciones_boton, imagen_titulo)
-        contador = 0
-        pygame.display.update()
 
     if contando:
         cuadro_tiempo, contador_segundos = contar_segundos(dicc_bliteos, dicc_dibujos,tiempo_inicial, fuente_gen, NEGRO, posicion_tiempos_x, posicion_tiempos_y, ancho_caja_tiempos, alto_caja_tiempos)
@@ -139,36 +121,33 @@ while flag == True:
 
             elif evento.key == pygame.K_RETURN:
             
-                if texto_ingresado.lower() == atributos_pokemon[0].lower():
+                if texto_ingresado.lower() == dicc_atributos_pokemon['nombre_pokemon'].lower():
                     contador = incrementar_rachas(contador)
                     contando = False
-
                     lista_tiempos.append(contador_segundos)
                     mejor_racha, racha = mejorar_racha("Packaje_PARCIAL2\mejor_racha.csv", contador)
 
+                    ventana.blit(dicc_atributos_pokemon['pokemon_resuelto'], (posicion_cuadro_imagen_x, posicion_cuadro_imagen_y))
+                    
                     for i in range(len(lista_tiempos)):
                         tiempo_anterior = lista_tiempos[len(lista_tiempos) - 1]
-                    
                     # Actualizar el texto del contador actual
                     cuadro_racha_actual, cuadro_mejor_racha = actualizar_tabla(dicc_bliteos, dicc_dibujos,contador, racha, fuente_gen, NEGRO, ancho_caja_racha_actual, alto_caja_racha_actual, cuadro_racha)
-
                     # Actualizar el tiempos del contador
                     cuadro_tiempo_anterior, cuadro_tiempo_promedio, rect_titulo_tabla_mejor_tiempo = actualizar_tiempos(dicc_bliteos, dicc_dibujos,lista_tiempos, tiempo_anterior, fuente_mejores_tiempo, NEGRO, posicion_caja_tiempos_x, posicion_caja_tiempos_y,ancho_caja_racha_actual, alto_caja_racha_actual)
 
-                    idiomas_pokemon(ventana, dicc_bliteos, dicc_dibujos, fuente_idiomas, NEGRO, BLANCO, posicion_caja_idiomas_x, posicion_caja_idiomas_y, ancho_caja_idiomas, alto_caja_idiomas, atributos_pokemon[4], atributos_pokemon[5], atributos_pokemon[6])
+                    idiomas_pokemon(ventana, dicc_bliteos, dicc_dibujos, fuente_idiomas, NEGRO, BLANCO, posicion_caja_idiomas_x, posicion_caja_idiomas_y, ancho_caja_idiomas, alto_caja_idiomas, dicc_atributos_pokemon['nombre_frances'], dicc_atributos_pokemon['nombre_italiano'], dicc_atributos_pokemon['nombre_aleman'])
+                    desblitear_idiomas(dicc_bliteos, dicc_dibujos)
                     
                     pygame.display.update()
                     pygame.time.wait(2000)
 
-                    desbliterar_elementos(dicc_bliteos, dicc_dibujos)
-
-                    atributos_pokemon = cargar_nuevo_pokemon(pokemones, eneable_gen_1, eneable_gen_2, eneable_gen_3, ancho_cuadro_imagen, alto_cuadro_imagen, facil)
+                    dicc_atributos_pokemon = cargar_nuevo_pokemon(pokemones, lista_pokemones_jugados,eneable_gen_1, eneable_gen_2, eneable_gen_3, ancho_cuadro_imagen, alto_cuadro_imagen, facil)
                     texto_ingresado = ""
                     tiempo_inicial = pygame.time.get_ticks() // 1000
                     contando = True
 
                 else:
-                    print("No coincide")
                     texto_ingresado = ""
                     #COLOR_CUADRO_TEXTO = ROJO
                     pygame.display.update()
@@ -176,12 +155,6 @@ while flag == True:
                 texto_ingresado += evento.unicode
 
         elif evento.type == pygame.MOUSEBUTTONDOWN:
-
-                if evento.button == 1:  # Boton izq 
-                    if blitear_pantalla == False:
-                        if cuadro_jugar.collidepoint(evento.pos):
-                            blitear_pantalla = True
-                            contador = 0
 
                     # Boton dificultad facil por defecto activo
                     if lista_boton_facil[1].collidepoint(evento.pos):
@@ -227,31 +200,34 @@ while flag == True:
                     else:
                         COLOR_CUADRO_TEXTO = GRIS_CLARO
 
+                    
                     # Boton "Mostrar imagen oculta"
                     if cuadro_boton.collidepoint(evento.pos):
-                        idiomas_pokemon(ventana, dicc_bliteos, dicc_dibujos,fuente_idiomas, NEGRO, BLANCO, posicion_caja_idiomas_x, posicion_caja_idiomas_y, ancho_caja_idiomas, alto_caja_idiomas, atributos_pokemon[4], atributos_pokemon[5], atributos_pokemon[6])
-                        no_lo_conozco(ventana, atributos_pokemon, posicion_cuadro_imagen_x, posicion_cuadro_imagen_y, cuadro_de_texto, fuente_cuadro_texto, NEGRO)
+                        idiomas_pokemon(ventana, dicc_bliteos, dicc_dibujos,fuente_idiomas, NEGRO, BLANCO, posicion_caja_idiomas_x, posicion_caja_idiomas_y, ancho_caja_idiomas, alto_caja_idiomas, dicc_atributos_pokemon['nombre_frances'], dicc_atributos_pokemon['nombre_italiano'], dicc_atributos_pokemon['nombre_aleman'])
+                        desblitear_idiomas(dicc_bliteos, dicc_dibujos)
+                        no_lo_conozco(ventana, dicc_atributos_pokemon, posicion_cuadro_imagen_x, posicion_cuadro_imagen_y, cuadro_de_texto, fuente_cuadro_texto, NEGRO)
+                        contador = 0
+                        tiempo_inicial = pygame.time.get_ticks() // 1000
                         titulo_puntos, cuadro_racha_actual, rect_titulo_puntos = crear_texto_en_caja(dicc_bliteos, "actual", dicc_dibujos,"Actual: " + str(contador), fuente_gen, NEGRO, BLANCO,ancho_caja_racha_actual, alto_caja_racha_actual, cuadro_racha, "center", "midleft")
                         actualizar_elemento(dicc_bliteos, "titulo_puntos", titulo_puntos, rect_titulo_puntos)
 
-                        atributos_pokemon = cargar_nuevo_pokemon(pokemones, eneable_gen_1, eneable_gen_2, eneable_gen_3, ancho_cuadro_imagen, alto_cuadro_imagen, facil)
-                        contador = 0
-                        COLOR_BOTON = BLANCO
+                        dicc_atributos_pokemon = cargar_nuevo_pokemon(pokemones, lista_pokemones_jugados, eneable_gen_1, eneable_gen_2, eneable_gen_3, ancho_cuadro_imagen, alto_cuadro_imagen, facil)
 
-    #ventana.fill(COLOR_FONDO)
+    if contador == 10:
+        bandera_juego_terminado = True
+        mostrar_cuadro_final_partida(ventana, dicc_bliteos, dicc_dibujos, matriz_posiciones_boton, ANCHO_VENTANA, ALTO_VENTANA, fuente_resultados, fuente_boton, lista_tiempos, tiempo_anterior)
+        pygame.display.update()
+
     ventana.blit(fondo_ventana, (0, 0))
     fondo_ventana = pygame.transform.scale(fondo_ventana, TAMAÑO_VENTANA)
-
-    if blitear_pantalla:
+    
+    texto = fuente_cuadro_texto.render(texto_ingresado, True, NEGRO)
+    ventana.blit(dicc_atributos_pokemon['silueta_aleatoria'], (posicion_cuadro_imagen_x, posicion_cuadro_imagen_y))
+    
+    if bandera_juego_terminado == False: 
         dibujar_rectangulos(ventana, dicc_dibujos)
-
-        texto = fuente_cuadro_texto.render(texto_ingresado, True, NEGRO)
-        ventana.blit(atributos_pokemon[1], (posicion_cuadro_imagen_x, posicion_cuadro_imagen_y))
-
         blitear_objetos(ventana, dicc_bliteos, texto, cuadro_de_texto)
-
-
-    pygame.display.update()
+        pygame.display.update()
 
 pygame.quit()
 sys.exit()

@@ -1,3 +1,4 @@
+from funciones import *
 #------------------------COLORES-------------------------
 NEGRO = (0,0,0)    
 ROJO = (255,0,0)
@@ -59,12 +60,15 @@ alto_caja_seleccion_gen = 100
 posicion_caja_selec_gen_x = 40
 posicion_caja_selec_gen_y = 200
 
+atributos_selec_gen = crear_matriz_valores(posicion_caja_selec_gen_x, posicion_caja_selec_gen_y, ancho_caja_seleccion_gen, alto_caja_seleccion_gen)
 #------------------------Atributos tabla de rachas-------------------------
 ancho_caja_puntaje = 220
 alto_caja_puntaje = 160
 
 posicion_caja_puntaje_x = ANCHO_VENTANA - ancho_caja_puntaje - 40
 posicion_caja_puntaje_y = 100
+
+atributos_caja_puntaje = crear_matriz_valores(posicion_caja_puntaje_x, posicion_caja_puntaje_y, ancho_caja_puntaje, alto_caja_puntaje)
 
 ancho_caja_racha_actual = 180
 alto_caja_racha_actual = 50
@@ -85,10 +89,9 @@ posicion_caja_idiomas_y = 700
 
 posicion_boton_x = (ANCHO_VENTANA - ancho_boton) // 2
 
-matriz_posiciones_boton = [
-    [posicion_boton_x, posicion_cuadro_de_texto_y + 70],
-    [ancho_boton, alto_boton]
-]
+
+
+atributos_botones = crear_matriz_valores(posicion_boton_x, posicion_cuadro_de_texto_y - 40, ancho_boton, alto_boton)
 
 lista_de_imagenes = []
 
@@ -102,6 +105,7 @@ alto_boton_dificultad = 30
 posicion_dificultad_x = 40
 posicion_dificultad_y = 350
 
+atributos_dificultad = crear_matriz_valores(posicion_dificultad_x, posicion_dificultad_y, ancho_caja_dificultad, alto_caja_dificultad)
 #------------------------Atributos cajas tiempo-------------------------
 #---------Actual-------
 ancho_caja_tiempos = 220
@@ -110,6 +114,7 @@ alto_caja_tiempos = 50
 posicion_tiempos_x = ANCHO_VENTANA - (ancho_caja_tiempos + 40)
 posicion_tiempos_y = 300
 
+atributos_tiempos = crear_matriz_valores(posicion_tiempos_x, posicion_tiempos_y, ancho_caja_dificultad, alto_caja_dificultad)
 #---------Tabla-------
 ancho_tabla_tiempos = 220
 alto_tabla_tiempos = 130

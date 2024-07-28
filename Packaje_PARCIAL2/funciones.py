@@ -10,15 +10,11 @@ def cargar_pokemones_en_lista(lista_pokemones: list, pokemones_dicc: dict):
     #    Retorna:
     #      lista_pokemones -> lista con los diccionarios de todos los pokemones
     for nombre, pokemones in pokemones_dicc.items():
-        pokemon = {
-            "nombre": nombre,
-            "generacion": pokemones["generacion"],
-            "imagen_normal": pokemones["imagen_normal"],
-            "silueta": pokemones["silueta"],
-            "frances": pokemones["frances"],
-            "italiano": pokemones["italiano"],
-            "aleman": pokemones["aleman"]
-        }
+
+        lista_keys = ['nombre', 'generacion', 'imagen_normal', 'silueta', 'frances', 'italiano', 'aleman']
+        lista_valores = [nombre, pokemones["generacion"], pokemones["imagen_normal"], pokemones["silueta"], pokemones["frances"], pokemones["italiano"], pokemones["aleman"]]
+        pokemon = crear_diccionarios(7, lista_keys, lista_valores)
+
         lista_pokemones.append(pokemon)
     return lista_pokemones
 
@@ -43,7 +39,7 @@ def separar_por_gen(lista_pokemones):
     return lista_gen1, lista_gen2, lista_gen3
 
 
-def cargar_nuevo_pokemon(lista_pokemones: list, lista_pokemones_jugados: list, eneables_generaciones: list, ancho_imagen: int, alto_imagen: int, is_facil: bool):
+def cargar_nuevo_pokemon(lista_pokemones: list, lista_pokemones_jugados: list, eneables_generaciones: list, list_dimenciones_img: list, is_facil: bool):
     # Inserta en una lista los pokemones y luego elije uno sin repetir los jugados
     #
     #    Argumento:
@@ -106,20 +102,15 @@ def cargar_nuevo_pokemon(lista_pokemones: list, lista_pokemones_jugados: list, e
     lista_pokemones_jugados.append(pokemon_actual['nombre'])
     #Este se puede hacer en una funcion que carge y escale
     silueta_aleatoria = pygame.image.load(ruta_imagen_silueta)
-    silueta_aleatoria = pygame.transform.scale(silueta_aleatoria, (ancho_imagen, alto_imagen))
+    silueta_aleatoria = pygame.transform.scale(silueta_aleatoria, (list_dimenciones_img[0], list_dimenciones_img[1]))
 
     pokemon_resuelto = pygame.image.load(ruta_imagen_normal)
-    pokemon_resuelto = pygame.transform.scale(pokemon_resuelto, (ancho_imagen, alto_imagen))
+    pokemon_resuelto = pygame.transform.scale(pokemon_resuelto, (list_dimenciones_img[0], list_dimenciones_img[1]))
 
-    dicc_atributos_pokemon = {
-        'nombre_pokemon': nombre_pokemon, 
-        'silueta_aleatoria': silueta_aleatoria, 
-        'pokemon_resuelto': pokemon_resuelto,
-        'generacion_pokemon': generacion_pokemon,
-        'nombre_frances': nombre_frances, 
-        'nombre_italiano': nombre_italiano, 
-        'nombre_aleman': nombre_aleman
-    }
+    lista_keys = ['nombre_pokemon', 'silueta_aleatoria', 'pokemon_resuelto', 'generacion_pokemon', 'nombre_aleman', 'nombre_italiano', 'nombre_frances']
+    lista_valores = [nombre_pokemon, silueta_aleatoria, pokemon_resuelto, generacion_pokemon, nombre_aleman, nombre_italiano, nombre_frances]
+    dicc_atributos_pokemon = crear_diccionarios(7, lista_keys, lista_valores)
+
     return dicc_atributos_pokemon
 
 def crear_matriz_valores(posicion_x, posicion_y, ancho: int, alto: int):
@@ -170,10 +161,10 @@ def crear_texto_rect(dicc_bliteos: dict, key:str, texto: str, fuente, color):
     #texto_rect.center = (ANCHO_VENTANA // 2, 60)
     dicc_bliteos[key] = [texto_mostrar, texto_rect]
 
-    elementos_texto = {
-        'texto': texto_mostrar,
-        'texto_rect': texto_rect
-    }
+    lista_valores = [texto_mostrar, texto_rect]
+    lista_keys = ['texto', 'texto_rect']
+
+    elementos_texto = crear_diccionarios(2, lista_keys, lista_valores)
 
     return elementos_texto
 
@@ -184,12 +175,10 @@ def crear_dicc_posicionar(posicion: str, caja, color_boton, border_radius: int):
     #      posicion [str] -> _description_
     #    Retorna:
     #      retorna -> _description_
-    posicionar_cuadro_boton = {
-        'posicion': posicion,
-        'caja': caja,
-        'color_boton': color_boton,
-        'border_radius': border_radius
-    }
+    lista_keys = ['posicion', 'caja', 'color_boton', 'border_radius']
+    lista_valores = [posicion, caja, color_boton, border_radius]
+
+    posicionar_cuadro_boton = crear_diccionarios(4, lista_keys, lista_valores)
     return posicionar_cuadro_boton
 
 def dicc_atributos_texto(fuente, color_texto, color_fondo, ancho: int, alto: int, caja):
@@ -199,14 +188,10 @@ def dicc_atributos_texto(fuente, color_texto, color_fondo, ancho: int, alto: int
     #      posicion [str] -> _description_
     #    Retorna:
     #      retorna -> _description_
-    dicc_atributos_crear_caja = {
-        'fuente': fuente,
-        'color_texto': color_texto,
-        'color_fondo': color_fondo,
-        'ancho': ancho,
-        'alto': alto,
-        'caja': caja
-    }
+    lista_valores = [fuente, color_texto, color_fondo, ancho, alto, caja]
+    lista_keys = ['fuente', 'color_texto', 'color_fondo', 'ancho', 'alto', 'caja']
+
+    dicc_atributos_crear_caja = crear_diccionarios(6, lista_keys, lista_valores)
     return dicc_atributos_crear_caja
 
 def crear_rectangulo_objeto(dicc_dibujos: dict, key: str, atributos_boton, centrar: bool, atributos_posicionar):
@@ -266,10 +251,10 @@ def crear_texto_en_caja(dicc_bliteos: dict, key:str, dicc_dibujos: dict, texto, 
     #      rectangulo_objeto -> Rectangulo del objeto creado
     lista_atributos = []
     dicc_texto_rect = crear_texto_rect(dicc_bliteos, key, texto, dicc_atributos_texto['fuente'], dicc_atributos_texto['color_texto'])
-    lista_atributos.append(texto)
+    lista_atributos.append(dicc_texto_rect['texto'])
 
-    atributos_texto = crear_dicc_posicionar("midtop", dicc_texto_rect['texto_rect'], (255,255,255), 8)
-    
+    atributos_texto = crear_dicc_posicionar("midtop", dicc_texto_rect['texto_rect'], dicc_atributos_texto['color_fondo'], 8)
+
     atributos_caja = crear_matriz_valores(0, 0, dicc_atributos_texto['ancho'], dicc_atributos_texto['alto'])
     caja = crear_rectangulo_objeto(dicc_dibujos, key, atributos_caja, False, atributos_texto) #Blanco
     centrar_objeto(posicion_caja, caja, dicc_atributos_texto['caja'])
@@ -280,7 +265,7 @@ def crear_texto_en_caja(dicc_bliteos: dict, key:str, dicc_dibujos: dict, texto, 
 
     return lista_atributos
 
-def idiomas_pokemon(ventana, dicc_bliteos, dicc_dibujos: dict,fuente, color_texto, color_caja,posicion_x, posicion_y, ancho, alto, nombre_frances, nombre_italiano, nombre_aleman):
+def idiomas_pokemon(ventana, dicc_bliteos, dicc_dibujos: dict, atributos_caja, nombres_traducidos):
     # Crea, dibuja y blitea las cajas de los idiomas de los pokemones con sus traducciones
     #
     #    Argumento:
@@ -289,21 +274,29 @@ def idiomas_pokemon(ventana, dicc_bliteos, dicc_dibujos: dict,fuente, color_text
     #      nombre_aleman [str] -> nombre del pokemon traducido
     #      nombre_italiano [str] -> nombre del pokemon traducido
     #      nombre_frances [str] -> nombre del pokemon traducido
-    rect_titulo_frances = crear_texto_rect(dicc_bliteos, "nombre_frances", nombre_frances, fuente, color_texto)
-    rect_titulo_italiano = crear_texto_rect(dicc_bliteos, "nombre_italiano", nombre_italiano, fuente, color_texto)
-    rect_titulo_aleman = crear_texto_rect(dicc_bliteos, "nombre_aleman", nombre_aleman, fuente, color_texto)
+    dicc_tit_fran = crear_texto_rect(dicc_bliteos, "nombre_frances", nombres_traducidos['nombre_frances'], atributos_caja[0], atributos_caja[1])
+    dicc_tit_ital = crear_texto_rect(dicc_bliteos, "nombre_italiano", nombres_traducidos['nombre_italiano'], atributos_caja[0], atributos_caja[1])
+    dicc_tit_ale = crear_texto_rect(dicc_bliteos, "nombre_aleman", nombres_traducidos['nombre_aleman'], atributos_caja[0], atributos_caja[1])
 
-    cuadro_frances = crear_rectangulo_objeto(dicc_dibujos, "cuadro_frances",posicion_x, posicion_y, ancho, alto, True, "midright", rect_titulo_frances, (255,255,255), 8)
-    cuadro_italiano = crear_rectangulo_objeto(dicc_dibujos, "cuadro_italiano",posicion_x + ancho + 10, posicion_y, ancho, alto, True, "midright", rect_titulo_italiano, (255,255,255), 8)
-    cuadro_aleman = crear_rectangulo_objeto(dicc_dibujos, "cuadro_aleman",posicion_x + ancho * 2 + 20, posicion_y, ancho, alto, True, "midright", rect_titulo_aleman, (255,255,255), 8)
+    atributos_frances = crear_matriz_valores(atributos_caja[3][0][0],  atributos_caja[3][0][1],  atributos_caja[3][1][0],  atributos_caja[3][1][1])
+    atributos_italiano = crear_matriz_valores(atributos_caja[3][0][0] +  atributos_caja[3][1][0] + 10, atributos_caja[3][0][1],  atributos_caja[3][1][0],  atributos_caja[3][1][1])
+    atributos_aleman = crear_matriz_valores(atributos_caja[3][0][0] +  atributos_caja[3][1][0] * 2 + 20, atributos_caja[3][0][1],  atributos_caja[3][1][0],  atributos_caja[3][1][1])
 
-    pygame.draw.rect(ventana, color_caja, cuadro_frances, border_radius=8)    # caja frances
-    pygame.draw.rect(ventana, color_caja, cuadro_italiano, border_radius=8)    # caja italiano
-    pygame.draw.rect(ventana, color_caja, cuadro_aleman, border_radius=8)    # caja  aleman
+    atributos_texto_fran = crear_dicc_posicionar("midright", dicc_tit_fran['texto_rect'], atributos_caja[2], 8)
+    atributos_texto_ale = crear_dicc_posicionar("midright", dicc_tit_ital['texto_rect'], atributos_caja[2], 8)
+    atributos_texto_ital = crear_dicc_posicionar("midright", dicc_tit_ale['texto_rect'], atributos_caja[2], 8)
 
-    ventana.blit(titulo_frances, rect_titulo_frances) #nombre frances
-    ventana.blit(titulo_italiano, rect_titulo_italiano) #nombre italiano
-    ventana.blit(titulo_aleman, rect_titulo_aleman) #nombre aleman
+    cuadro_frances = crear_rectangulo_objeto(dicc_dibujos, "cuadro_frances", atributos_frances, True, atributos_texto_fran)
+    cuadro_italiano = crear_rectangulo_objeto(dicc_dibujos, "cuadro_italiano", atributos_italiano, True, atributos_texto_ital)
+    cuadro_aleman = crear_rectangulo_objeto(dicc_dibujos, "cuadro_aleman", atributos_aleman, True, atributos_texto_ale)    
+
+    pygame.draw.rect(ventana, atributos_caja[2], cuadro_frances, border_radius=8)    # caja frances
+    pygame.draw.rect(ventana, atributos_caja[2], cuadro_italiano, border_radius=8)    # caja italiano
+    pygame.draw.rect(ventana, atributos_caja[2], cuadro_aleman, border_radius=8)    # caja  aleman
+
+    ventana.blit(dicc_tit_fran['texto'], dicc_tit_fran['texto_rect']) #nombre frances
+    ventana.blit(dicc_tit_ital['texto'], dicc_tit_ital['texto_rect']) #nombre italiano
+    ventana.blit(dicc_tit_ale['texto'], dicc_tit_ale['texto_rect']) #nombre aleman
 
 def mejorar_racha(path, racha_actual: int):
     # Lee del CSV cual es la mejor racha
@@ -334,7 +327,7 @@ def blitear_objetos(ventana, diccionario_objetos, texto, cuadro_texto):
     #      cuadro_texto -> nombre del pokemon traducido
     texto_rect = texto.get_rect()
     texto_rect.center = cuadro_texto.center
-    ventana.blit(texto, texto_rect)  # texto del cuadro de texto
+    ventana.blit(texto, texto_rect)  # texto del cuadro de textox
 
     for elemento in diccionario_objetos.values():
         ventana.blit(elemento[0], elemento[1])
@@ -347,7 +340,7 @@ def dibujar_rectangulos(ventana, diccionario_dibujos):
     for elemento in diccionario_dibujos.values():
         pygame.draw.rect(ventana, elemento[0], elemento[1], border_radius = elemento[2])
 
-def actualizar_elemento(diccionario, clave, nueva_imagen=None, nueva_posicion=None):
+def actualizar_elemento(diccionario, clave, nueva_imagen, nueva_posicion):
     # Modifica en el diccionario el objeto que se modifica dentro del bucle
     #
     #    Argumento:
@@ -393,27 +386,55 @@ def actualizar_tiempos(dicc_bliteos: dict, dicc_dibujos: dict, dicc_tabla: dict,
     ancho_caja = 220
     alto_caja = 130
 
-    titulo_tabla_mejor_tiempo, rect_titulo_tabla_mejor_tiempo = crear_texto_rect(dicc_bliteos, "mejor_tiempo"," Mejor tiempo: " + str(mejor_tiempo), dicc_tabla['fuente'], dicc_tabla['color_texto'])
-    actualizar_elemento(dicc_bliteos, "mejor_tiempo", titulo_tabla_mejor_tiempo, rect_titulo_tabla_mejor_tiempo)  
-    tabla_tiempo = crear_rectangulo_objeto(dicc_dibujos,"tabla_tiempo",lista_elementos_texto[2], lista_elementos_texto[3], ancho_caja, alto_caja, True, "topleft", rect_titulo_tabla_mejor_tiempo, dicc_tabla['color_fondo'], 8)
+    atrib_mejor_tiempo = crear_texto_rect(dicc_bliteos, "mejor_tiempo"," Mejor tiempo: " + str(mejor_tiempo), dicc_tabla['fuente'], dicc_tabla['color_texto'])
+    actualizar_elemento(dicc_bliteos, "mejor_tiempo", atrib_mejor_tiempo['texto'], atrib_mejor_tiempo['texto_rect'])  
+
+    atributos_dimenciones = crear_matriz_valores(lista_elementos_texto[2], lista_elementos_texto[3], ancho_caja, alto_caja)
+    atributos_texto = crear_dicc_posicionar("topleft", atrib_mejor_tiempo['texto_rect'], dicc_tabla['color_fondo'], 8)
+
+    tabla_tiempo = crear_rectangulo_objeto(dicc_dibujos, "tabla_tiempo", atributos_dimenciones, True, atributos_texto)
     
     dicc_texto_tiempos = dicc_atributos_texto(dicc_tabla['fuente'], dicc_tabla['color_texto'], dicc_tabla['color_fondo'], dicc_tabla['ancho'], dicc_tabla['alto'], tabla_tiempo)
-    lista_tiempo_anteriror = crear_texto_en_caja(dicc_bliteos, "tiempo_anterior",dicc_dibujos," Tiempo anterior: " + str(lista_elementos_texto[1]) + "s", dicc_texto_tiempos, "midleft", "midleft")
-    actualizar_elemento(dicc_bliteos, "tiempo_anterior", lista_tiempo_anteriror[0], lista_tiempo_anteriror[2])
+    lista_tiempo_anteriror = crear_texto_en_caja(dicc_bliteos, "tiempo_anterior",dicc_dibujos,"  anterior: " + str(lista_elementos_texto[1]) + "s", dicc_texto_tiempos, "midleft", "midleft")
+    actualizar_elemento(dicc_bliteos, "tiempo_anterior", lista_tiempo_anteriror[0], lista_tiempo_anteriror[1])
 
     promedio = promedio_tiempos(lista_elementos_texto[0])
 
-    lista_tiempo_promedio = crear_texto_en_caja(dicc_bliteos, "tiempo_promedio",dicc_dibujos, " Tiempo promedio: " + str(promedio) + "s", dicc_texto_tiempos, "bottomleft", "midleft")
-    actualizar_elemento(dicc_bliteos, "tiempo_promedio", lista_tiempo_promedio[0], lista_tiempo_promedio[2])  
+    lista_tiempo_promedio = crear_texto_en_caja(dicc_bliteos, "tiempo_promedio", dicc_dibujos, "  promedio: " + str(promedio) + "s", dicc_texto_tiempos, "bottomleft", "midleft")
+    actualizar_elemento(dicc_bliteos, "tiempo_promedio", lista_tiempo_promedio[0], lista_tiempo_promedio[1])  
 
-    dicc_resultados = {
-        'tiempo_anterior': lista_tiempo_anteriror[1],
-        'tiempo_promedio': lista_tiempo_promedio[1],
-        'rect_titulo_tabla': rect_titulo_tabla_mejor_tiempo
-    }
+    lista_keys = ['rect_titulo_tabla', 'tiempo_anterior', 'tiempo_promedio']
+    lista_valroes = [atrib_mejor_tiempo['texto_rect'], lista_tiempo_anteriror[1], lista_tiempo_promedio[1]]
+    dicc_resultados = crear_diccionarios(3, lista_keys, lista_valroes)
 
     return dicc_resultados
 
+def get_mejor_tiempo(lista_tiempos: list):
+    # Obtine el menor tiempo de todos
+    #
+    #    Argumento:
+    #      lista_tiempos [list] -> Todos los tiempos de la partida
+    #    Retorna:
+    #      mejor_tiempo -> El tiempo menor dentro de la lista
+    mejor_tiempo = 99999999999
+
+    for i in range(len(lista_tiempos)):
+        if lista_tiempos[i] < mejor_tiempo:
+            mejor_tiempo = lista_tiempos[i]
+    
+    return mejor_tiempo
+
+def get_tiempo_anterior(lista_tiempos: list):
+    # _descripcion_
+    #
+    #    Argumento:
+    #      lista_tiempos [list] -> _description_
+    #    Retorna:
+    #      retorna -> _description_
+    for i in range(len(lista_tiempos)):
+        tiempo_anterior = lista_tiempos[len(lista_tiempos) - 1]
+
+    return tiempo_anterior
 
 def promedio_tiempos(lista_tiempos: list) -> float:
     # Realiza un promedio de todos los tiempos guardados en la partida
@@ -431,8 +452,7 @@ def promedio_tiempos(lista_tiempos: list) -> float:
     promedio = float("{:.2f}".format(promedio)) # Corta a al segundo decimal
     return promedio
 
-
-def contar_segundos(dicc_bliteos, dicc_dibujos, tiempo_inicial: int, fuente_texto_segundos, color_texto_segundos, posicion_tiempos_x: int , posicion_tiempos_y: int, ancho_caja_tiempos: int, alto_caja_tiempos: int):
+def contar_segundos(dicc_bliteos, dicc_dibujos, tiempo_inicial: int, lista_atributos: list):
     # Cuenta cada 1 segundo y crea los textos en las cajas para mostrarlos en el juego
     #
     #    Argumento:
@@ -443,9 +463,12 @@ def contar_segundos(dicc_bliteos, dicc_dibujos, tiempo_inicial: int, fuente_text
     #      retorna -> Cuadro de las dos cajas creadas
     tiempo_transcurrido = pygame.time.get_ticks() // 1000 - tiempo_inicial
     contador_segundos = tiempo_transcurrido
-    titulo_tabla_tiempo, rect_titulo_tabla_timepo = crear_texto_rect(dicc_bliteos, "tiempo"," Tiempo: " + str(contador_segundos) + "s", fuente_texto_segundos, color_texto_segundos)
-    cuadro_tiempo = crear_rectangulo_objeto(dicc_dibujos, " Tiempo: ",posicion_tiempos_x, posicion_tiempos_y, ancho_caja_tiempos, alto_caja_tiempos, True, "midleft", rect_titulo_tabla_timepo, (255,255,255), 8)
-    actualizar_elemento(dicc_bliteos, "tiempo", titulo_tabla_tiempo, rect_titulo_tabla_timepo)
+    dicc_posiciones = lista_atributos[3]
+    dicc_tabla = crear_texto_rect(dicc_bliteos, "tiempo"," Tiempo: " + str(contador_segundos) + "s", lista_atributos[0], lista_atributos[2])
+    atributos_cuadro = crear_matriz_valores(dicc_posiciones[0][0], dicc_posiciones[0][1], dicc_posiciones[1][0], dicc_posiciones[1][1])
+    atributos_texto = crear_dicc_posicionar("midleft", dicc_tabla['texto_rect'], lista_atributos[1], 8)
+    cuadro_tiempo = crear_rectangulo_objeto(dicc_dibujos, " Tiempo: ", atributos_cuadro, True, atributos_texto)
+    actualizar_elemento(dicc_bliteos, "tiempo", dicc_tabla['texto'], dicc_tabla['texto_rect'])
     
     return cuadro_tiempo, contador_segundos
 
@@ -461,21 +484,45 @@ def no_lo_conozco(ventana, dicc_pokemon, posicion_cuadro_imagen_x, posicion_cuad
     pygame.display.update()
     pygame.time.wait(2000)
 
-
-def get_mejor_tiempo(lista_tiempos: list):
-    # Obtine el menor tiempo de todos
+def crear_botones_selec_gen(dicc_bliteos, dicc_dibujos, dicc_color_botones, elementos_texto: dict):
+    # _descripcion_
     #
     #    Argumento:
-    #      lista_tiempos [list] -> Todos los tiempos de la partida
+    #      parametro [tipoDeDato] -> _description_
     #    Retorna:
-    #      mejor_tiempo -> El tiempo menor dentro de la lista
-    mejor_tiempo = 99999999999
+    #      retorna -> _description_
+    atributos_boton_gen1 = dicc_atributos_texto(elementos_texto['fuente_gen'], elementos_texto['color_texto'], dicc_color_botones['color_boton_gen_1'], elementos_texto['ancho_btn_gen'], elementos_texto['alto_btn_gen'], elementos_texto['caja'])
+    atributos_boton_gen2 = dicc_atributos_texto(elementos_texto['fuente_gen'], elementos_texto['color_texto'], dicc_color_botones['color_boton_gen_2'], elementos_texto['ancho_btn_gen'], elementos_texto['alto_btn_gen'], elementos_texto['caja'])
+    atributos_boton_gen3 = dicc_atributos_texto(elementos_texto['fuente_gen'], elementos_texto['color_texto'], dicc_color_botones['color_boton_gen_3'], elementos_texto['ancho_btn_gen'], elementos_texto['alto_btn_gen'], elementos_texto['caja'])
 
-    for i in range(len(lista_tiempos)):
-        if lista_tiempos[i] < mejor_tiempo:
-            mejor_tiempo = lista_tiempos[i]
-    
-    return mejor_tiempo
+    lista_boton_gen_1 = crear_texto_en_caja(dicc_bliteos, "boton_gen_1", dicc_dibujos, "1", atributos_boton_gen1, "bottomleft", "center")
+    lista_boton_gen_2 = crear_texto_en_caja(dicc_bliteos, "boton_gen_2", dicc_dibujos, "2", atributos_boton_gen2, "midbottom", "center")
+    lista_boton_gen_3 = crear_texto_en_caja(dicc_bliteos, "boton_gen_3", dicc_dibujos, "3", atributos_boton_gen3, "bottomright", "center")
+
+    lista_key_botones = ['boton_gen_1', 'boton_gen_2', 'boton_gen_3']
+    lista_val_botones = [lista_boton_gen_1, lista_boton_gen_2, lista_boton_gen_3]
+    dicc_botones = crear_diccionarios(3, lista_key_botones, lista_val_botones)
+
+    return dicc_botones
+
+def crear_botones_selec_dicicultad(dicc_bliteos, dicc_dibujos, dicc_color_botones, elementos_texto: dict):
+    # _descripcion_
+    #
+    #    Argumento:
+    #      parametro [tipoDeDato] -> _description_
+    #    Retorna:
+    #      retorna -> _description_
+    atributos_boton_facil = dicc_atributos_texto(elementos_texto['fuente_gen'], elementos_texto['color_texto'], dicc_color_botones['color_facil'], elementos_texto['ancho_btn_dif'], elementos_texto['alto_btn_dif'], elementos_texto['caja'])
+    atributos_boton_dificil = dicc_atributos_texto(elementos_texto['fuente_gen'], elementos_texto['color_texto'], dicc_color_botones['color_dificil'], elementos_texto['ancho_btn_dif'], elementos_texto['alto_btn_dif'], elementos_texto['caja'])
+
+    lista_boton_facil = crear_texto_en_caja(dicc_bliteos, "facil", dicc_dibujos, "Facil", atributos_boton_facil, "center", "center")
+    lista_boton_dificil= crear_texto_en_caja(dicc_bliteos, "dificil", dicc_dibujos, "Dificil", atributos_boton_dificil, "midbottom", "center")
+
+    lista_key_botones = ['boton_facil', 'boton_dificil']
+    lista_val_botones = [lista_boton_facil, lista_boton_dificil]
+    dicc_botones = crear_diccionarios(2, lista_key_botones, lista_val_botones)
+
+    return dicc_botones
 
 def desblitear_idiomas(dicc_bliteos: dict, dicc_dibujos: dict):
     # Elimina los cuadros de los idiomas luego del muestreo
@@ -489,6 +536,24 @@ def desblitear_idiomas(dicc_bliteos: dict, dicc_dibujos: dict):
     dicc_bliteos.pop('nombre_frances')
     dicc_bliteos.pop('nombre_italiano')
     dicc_bliteos.pop('nombre_aleman')
+
+def coincidencia_pokemon(elem_coincidencia: dict, dicc_atributos_pokemon, dicc_tabla_actual):
+    # _descripcion_
+    #
+    #    Argumento:
+    #      parametro [tipoDeDato] -> _description_
+    #    Retorna:
+    #      retorna -> _description_
+    elem_coincidencia['ventana'].blit(dicc_atributos_pokemon['pokemon_resuelto'], (elem_coincidencia['posicion_img_x'], elem_coincidencia['posicion_img_y']))
+
+    lista_tiempos = elem_coincidencia['elementos_tiempo']
+
+    idiomas_pokemon(elem_coincidencia['ventana'], elem_coincidencia['bliteos'], elem_coincidencia['dibujos'], elem_coincidencia['elementos_idiomas'], dicc_atributos_pokemon)
+    desblitear_idiomas(elem_coincidencia['bliteos'], elem_coincidencia['dibujos'])
+
+    # Actualizar el tiempos del contador
+    dicc_tiempo_actualizado = actualizar_tiempos(elem_coincidencia['bliteos'],elem_coincidencia['dibujos'], dicc_tabla_actual, lista_tiempos) 
+    
 
 def mostrar_cuadro_final_partida(ventana, dicc_bliteos, dicc_dibujos, ancho_ventana, alto_ventana, fuente_resultado, lista_tiempos):
     # Muestra los resultado de los tiempo de la partida una vez terminada
@@ -506,26 +571,139 @@ def mostrar_cuadro_final_partida(ventana, dicc_bliteos, dicc_dibujos, ancho_vent
     mejor_tiempo = get_mejor_tiempo(lista_tiempos)
     tiempo_promedio = promedio_tiempos(lista_tiempos)
 
-    titulo_tabla_tiempo, rect_tabla_final = crear_texto_rect(dicc_bliteos, "tiempos","Juego Terminado", fuente_resultado, color_letras)
-    cuadro_tiempo = crear_rectangulo_objeto(dicc_dibujos, "cuadro_tiempo", posicion_tiempos_x, posicion_tiempos_y, ancho_caja_tiempos, alto_caja_tiempos, True, "midtop", rect_tabla_final, color_fondo_objetos, 8)
+    dicc_juego_terminado = crear_texto_rect(dicc_bliteos, "tiempos","Juego Terminado", fuente_resultado, color_letras)
 
-    titulo_mejor_tiempo, rect_mejor_tiempo = crear_texto_rect(dicc_bliteos, "mejor_tiempo", " Mejor tiempo: " + str(mejor_tiempo) + "s", fuente_resultado, color_letras)
-    cuadro_mejor_tiempo = crear_rectangulo_objeto(dicc_dibujos, "cuadro_mejor_tiempo", ancho_ventana / 2, 300, 0, 0, True, "midtop", rect_mejor_tiempo, color_fondo_objetos, 8)
+    atributos_dimenciones = crear_matriz_valores(posicion_tiempos_x, posicion_tiempos_y, ancho_caja_tiempos, alto_caja_tiempos)
+    atributos_texto = crear_dicc_posicionar( "midtop", dicc_juego_terminado['texto_rect'], color_fondo_objetos, 8)
+
+    cuadro_tiempo = crear_rectangulo_objeto(dicc_dibujos, "cuadro_tiempo", atributos_dimenciones, True, atributos_texto)
+
+
+    atrib_mejor_tiempo = crear_texto_rect(dicc_bliteos, "mejor_tiempo", " Mejor tiempo: " + str(mejor_tiempo) + "s", fuente_resultado, color_letras)
+    dimen_mejor_tiempo = crear_matriz_valores(ancho_ventana / 2, 300, 0, 0)
+    atributos_mejor_tiempo = crear_dicc_posicionar("midtop", atrib_mejor_tiempo['texto_rect'], color_fondo_objetos, 8)
+    cuadro_mejor_tiempo = crear_rectangulo_objeto(dicc_dibujos, "cuadro_mejor_tiempo", dimen_mejor_tiempo, True, atributos_mejor_tiempo)
     
 
-    titulo_tiempo_anterior, rect_tiempo_anterior = crear_texto_rect(dicc_bliteos, "tiempo_anterior", " Mejor tiempo: " + str(mejor_tiempo) + "s", fuente_resultado, color_letras)
-    cuadro_tiempo_anterior = crear_rectangulo_objeto(dicc_dibujos, "cuadro_mejor_tiempo", ancho_ventana / 2, 400, 0, 0, True, "midtop", rect_tiempo_anterior, color_fondo_objetos, 8)
+    atrib_tiempo_ant = crear_texto_rect(dicc_bliteos, "tiempo_anterior", " Tiempo anterior: " + str(mejor_tiempo) + "s", fuente_resultado, color_letras)
+    dimen_tiempo_anterior = crear_matriz_valores(ancho_ventana / 2, 400, 0, 0)
+    atributos_tiempo_ante = crear_dicc_posicionar("midtop", atrib_tiempo_ant['texto_rect'], color_fondo_objetos, 8)
+    cuadro_tiempo_anterior = crear_rectangulo_objeto(dicc_dibujos, "cuadro_mejor_tiempo", dimen_tiempo_anterior, True, atributos_tiempo_ante)
     
-
-    titulo_tiempo_promedio, rect_tiempo_promedio = crear_texto_rect(dicc_bliteos, "tiempo_promedio", " Tiempo promedio: " + str(tiempo_promedio) + "s", fuente_resultado, color_letras)
-    cuadro_tiempo_promedio = crear_rectangulo_objeto(dicc_dibujos, "cuadro_mejor_tiempo", ancho_ventana / 2, 500, 0, 0, True, "midtop", rect_tiempo_promedio, color_fondo_objetos, 8)
+    dicc_tiempo_prom = crear_texto_rect(dicc_bliteos, "tiempo_promedio", " Tiempo promedio: " + str(tiempo_promedio) + "s", fuente_resultado, color_letras)
+    atrib_tiempo_prom = crear_dicc_posicionar("midtop", dicc_tiempo_prom['texto_rect'], color_fondo_objetos, 8)
+    dimen_tiempo_prom = crear_matriz_valores(ancho_ventana / 2, 500, 0, 0)
+    cuadro_tiempo_promedio = crear_rectangulo_objeto(dicc_dibujos, "cuadro_tiempo_promedio", dimen_tiempo_prom, True, atrib_tiempo_prom)
 
     pygame.draw.rect(ventana, color_fondo_objetos, cuadro_tiempo, border_radius = 12)
     pygame.draw.rect(ventana, color_fondo_objetos, cuadro_mejor_tiempo, border_radius = 8)
     pygame.draw.rect(ventana, color_fondo_objetos, cuadro_tiempo_anterior, border_radius = 8)
     pygame.draw.rect(ventana, color_fondo_objetos, cuadro_tiempo_promedio, border_radius = 8)
 
-    ventana.blit(titulo_tabla_tiempo, rect_tabla_final)
-    ventana.blit(titulo_mejor_tiempo, rect_mejor_tiempo)
-    ventana.blit(titulo_tiempo_anterior, rect_tiempo_anterior)
-    ventana.blit(titulo_tiempo_promedio, rect_tiempo_promedio)
+    ventana.blit(dicc_juego_terminado['texto'], dicc_juego_terminado['texto_rect'])
+    ventana.blit(atrib_mejor_tiempo['texto'], atrib_mejor_tiempo['texto_rect'])
+    ventana.blit(atrib_tiempo_ant['texto'], atrib_tiempo_ant['texto_rect'])
+    ventana.blit(dicc_tiempo_prom['texto'], dicc_tiempo_prom['texto_rect'])
+
+
+def seleccionar_evento(dicc_color_botones, evento, lista_botones: list, contador: int, dicc_elementos: dict, dicc_colores):
+    # _descripcion_
+    #
+    #    Argumento:
+    #      parametro [tipoDeDato] -> _description_
+    #    Retorna:
+    #      retorna -> _description_
+    # Boton dificultad facil por defecto activo
+    facil = bool(dicc_elementos['bool_facil'])
+    contador = contador
+
+    eneables_generaciones = [dicc_elementos['eneables_generaciones']]
+    eneables_generaciones = eneables_generaciones[0]
+
+    if lista_botones[0].collidepoint(evento.pos):
+        contador = 0
+        dicc_color_botones['color_facil'] = dicc_colores['VERDE']
+        dicc_color_botones['color_dificil'] = dicc_colores['ROJO']
+        facil = True
+
+    # Boton dificultad facil por defecto desactivado
+    if lista_botones[1].collidepoint(evento.pos):
+        contador = 0
+        dicc_color_botones['color_facil'] = dicc_colores['ROJO']
+        dicc_color_botones['color_dificil'] = dicc_colores['VERDE']
+        facil = False
+
+    if lista_botones[2].collidepoint(evento.pos) and eneables_generaciones[0]:
+        dicc_color_botones['color_boton_gen_1'] = dicc_colores['ROJO']
+        eneables_generaciones[0] = False
+    elif lista_botones[2].collidepoint(evento.pos) and eneables_generaciones[0] ==  False:
+        dicc_color_botones['color_boton_gen_1'] = dicc_colores['VERDE']
+        eneables_generaciones[0] = True
+
+    # Boton selecionar generacion 2 por defecto desactivado
+    if lista_botones[3].collidepoint(evento.pos) and eneables_generaciones[1] == False:
+        dicc_color_botones['color_boton_gen_2'] = dicc_colores['VERDE'] 
+        eneables_generaciones[1] = True
+    elif lista_botones[3].collidepoint(evento.pos) and eneables_generaciones[1]:
+        dicc_color_botones['color_boton_gen_2'] = dicc_colores['ROJO'] 
+        eneables_generaciones[1] = False
+
+    # Boton selecionar generacion 3 por defecto desactivado
+    if lista_botones[4].collidepoint(evento.pos) and eneables_generaciones[2] == False:
+        dicc_color_botones['color_boton_gen_3'] = dicc_colores['VERDE']  
+        eneables_generaciones[2] = True
+    elif lista_botones[4].collidepoint(evento.pos) and eneables_generaciones[2]:
+        dicc_color_botones['color_boton_gen_3'] = dicc_colores['ROJO']  
+        eneables_generaciones[2] = False 
+
+    # Boton escribir nombre
+    if lista_botones[5].collidepoint(evento.pos):    #verifico si presione el boton izq del mouse dentro del cuadro de texto. evento.pos devuelve las coordenadas del mouse
+        dicc_color_botones['color_cuadro'] = dicc_colores['BLANCO']  
+        contando = True
+        tiempo_inicial = pygame.time.get_ticks() // 1000
+    else:
+        dicc_color_botones['color_cuadro'] = dicc_colores['GRIS_CLARO'] 
+
+    #TENGO QUE DEVOLVER A CONTANDO
+    lista_keys = ['facil', 'eneables_generaciones'] 
+    lista_valores = [facil, eneables_generaciones]
+    dicc_nvos_elementos = crear_diccionarios(2, lista_keys, lista_valores)
+
+    return dicc_color_botones, dicc_nvos_elementos
+
+
+def crear_diccionarios(cantidad_elementos: int, list_claves: list, lista_valores: list):
+    # _descripcion_
+    #
+    #    Argumento:
+    #      parametro [tipoDeDato] -> _description_
+    #    Retorna:
+    #      retorna -> _description_
+    diccionario = {}
+    for i in range(cantidad_elementos):
+        clave = list_claves[i]
+        valor = lista_valores[i]
+        diccionario[clave] = valor
+    return diccionario
+
+def mostrar_imagen_oculta(elementos: dict):
+    # _descripcion_
+    #
+    #    Argumento:
+    #      parametro [tipoDeDato] -> _description_
+    #    Retorna:
+    #      retorna -> _description_
+    idiomas_pokemon(elementos['ventana'], elementos['dicc_bliteos'], elementos['dicc_dibujos'], elementos['caja_idiomas'], elementos['atrib_pokemon'])
+    desblitear_idiomas(elementos['dicc_bliteos'], elementos['dicc_dibujos'])
+    no_lo_conozco(elementos['ventana'], elementos['atrib_pokemon'], elementos['cuadro_imagen_x'], elementos['cuadro_imagen_y'], elementos['cuadro_de_texto'], elementos['fuente_cuadro_texto'], elementos['color_texto'])
+
+    contador = 0
+    lista_racha_actual = crear_texto_en_caja(elementos['dicc_bliteos'], "actual", elementos['dicc_dibujos'], "Actual: " + str(contador), elementos['dicc_texto'], "center", "midleft")
+    actualizar_elemento(elementos['dicc_bliteos'], "titulo_puntos", lista_racha_actual[0], lista_racha_actual[1])
+
+
+    retorna_key = ['contador']
+    retorna_val = [contador]
+    dicc_return = crear_diccionarios(1, retorna_key, retorna_val)
+
+    return dicc_return

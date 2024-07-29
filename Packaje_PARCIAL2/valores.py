@@ -1,8 +1,8 @@
 from funciones import *
 import pygame
-import sys
-
 pygame.init()
+
+
 #------------------------COLORES-------------------------
 negro = (0,0,0)    
 rojo = (255,0,0)
@@ -14,16 +14,10 @@ gris_claro = (200,200,200)
 rojo_claro = (255, 128, 128)
 verde_claro = (144, 238, 144)
 
-fuente_resultados = pygame.font.SysFont("Consolas", 32)
-fuente_cuadro_texto = pygame.font.SysFont("Arial", 20)
-fuente_boton = pygame.font.SysFont("Consolas", 15)
-fuente_gen = pygame.font.SysFont("Consolas", 25)
-fuente_mejores_tiempo = pygame.font.SysFont("Consolas", 20)
-fuente_idiomas = pygame.font.SysFont("Arial", 18)
 
 lista_keys_colores = ['NEGRO', 'ROJO', 'VERDE', 'BLANCO', 'GRIS_CLARO']
 lista_valores_colores = [negro, rojo, verde, blanco, gris_claro]
-dicc_colores = crear_diccionarios(5, lista_keys_colores, lista_valores_colores)
+dicc_colores = crear_diccionarios(lista_keys_colores, lista_valores_colores)
 
 color_fondo = (azul_claro)
 color_cuadro_texto = gris_claro
@@ -35,9 +29,15 @@ color_cuadro_imagen = azul_claro
 color_facil = verde
 color_dificil = rojo
 
+fuente_resultados = pygame.font.SysFont("Consolas", 32)
+fuente_cuadro_texto = pygame.font.SysFont("Arial", 20)
+fuente_boton = pygame.font.SysFont("Consolas", 20)
+fuente_gen = pygame.font.SysFont("Consolas", 25)
+fuente_idiomas = pygame.font.SysFont("Arial", 18)
+
 keys_color_botones = ['color_fondo', 'color_cuadro_texto', 'color_boton','color_boton_gen_1', 'color_boton_gen_2', 'color_boton_gen_3', 'color_cuadro_imagen', 'color_facil', 'color_dificil']
 valores_color_botones = [color_fondo, color_cuadro_texto, color_boton,color_boton_gen_1, color_boton_gen_2, color_boton_gen_3, color_cuadro_imagen, color_facil, color_dificil]
-dicc_color_botones = crear_diccionarios(9, keys_color_botones, valores_color_botones)
+dicc_color_botones = crear_diccionarios(keys_color_botones, valores_color_botones)
 #------------------------VENTANA-------------------------
 ancho_ventana = 1300
 alto_ventana = 750
@@ -95,6 +95,9 @@ atributos_caja_puntaje = crear_matriz_valores(posicion_caja_puntaje_x, posicion_
 ancho_caja_racha_actual = 180
 alto_caja_racha_actual = 50
 
+val_tabla_tiempos = [fuente_boton, negro, blanco,ancho_caja_racha_actual, alto_caja_racha_actual]
+val_tabla_actual = [fuente_gen, negro, blanco,ancho_caja_racha_actual, alto_caja_racha_actual]
+
 posicion_caja_racha_actual_x = ancho_ventana - (ancho_caja_racha_actual + 20)
 posicion_caja_racha_actual_y = 40
 
@@ -103,7 +106,7 @@ posicion_caja_mejor_racha_y = 40 + alto_caja_racha_actual + 20
 
 #------------------------Atributos cajas idiomas-------------------------
 cantidad_idiomas = 3
-ancho_caja_idiomas = 115
+ancho_caja_idiomas = 160
 alto_caja_idiomas = 35
 
 posicion_caja_idiomas_x = (ancho_ventana - (ancho_caja_idiomas * cantidad_idiomas)) /2
@@ -139,7 +142,7 @@ alto_caja_tiempos = 50
 posicion_tiempos_x = ancho_ventana - (ancho_caja_tiempos + 40)
 posicion_tiempos_y = 300
 
-atributos_tiempos = crear_matriz_valores(posicion_tiempos_x, posicion_tiempos_y, ancho_caja_dificultad, alto_caja_dificultad)
+atributos_tiempos = crear_matriz_valores(posicion_tiempos_x, posicion_tiempos_y, ancho_caja_tiempos, alto_caja_tiempos)
 #---------Tabla-------
 ancho_tabla_tiempos = 220
 alto_tabla_tiempos = 130

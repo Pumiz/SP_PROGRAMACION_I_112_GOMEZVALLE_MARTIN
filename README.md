@@ -4,7 +4,6 @@
 
 
 ## Integrantes 
-- Cristian Pentito
 - Martin Gomez Valle
 
 ## Descripción
